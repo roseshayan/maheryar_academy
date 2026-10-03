@@ -8,7 +8,7 @@
   <!-- SEO & Primary Meta Tags -->
   <title>دوره جامع مهارت‌های هفتگانه کامپیوتر (ICDL) با مدرک بین‌المللی | آموزشگاه ماهریار تهران</title>
   <meta name="title" content="دوره جامع مهارت‌های هفتگانه کامپیوتر (ICDL) با مدرک بین‌المللی | آموزشگاه ماهریار تهران">
-  <meta name="description" content="ثبت‌نام دوره جامع مهارت‌های هفتگانه کامپیوتر (ICDL ویژه بازار کار و اداری) با مجوز رسمی سازمان آموزش فنی و حرفه‌ای کشور. ۱۳۰ ساعت کارگاهی در دو شعبه مرتضوی و اسکندری تهران با اعطای مدرک بین‌المللی قابل ترجمه و پرداخت اقساطی.">
+  <meta name="description" content="ثبت‌نام دوره جامع مهارت‌های هفتگانه کامپیوتر (ICDL ویژه بازار کار و اداری) با مجوز رسمی سازمان آموزش فنی و حرفه‌ای کشور. آموزش حضوری و مجازی با اعطای مدرک بین‌المللی قابل ترجمه و پرداخت اقساطی در آموزشگاه ماهریار (تأسیس ۱۴۰۱).">
   <meta name="keywords" content="دوره ICDL تهران, آموزش مهارت های هفتگانه کامپیوتر, مدرک بین المللی ICDL فنی حرفه ای, کلاس ICDL منطقه 10 و 11, آموزشگاه کامپیوتر ماهریار, سرفصل های فنی حرفه ای ICDL, اقساطی">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://maheryar.ir/course-single.html">
@@ -19,7 +19,7 @@
   <meta property="og:url" content="https://maheryar.ir/course-single.html">
   <meta property="og:site_name" content="آموزشگاه فنی و حرفه‌ای آزاد ماهریار">
   <meta property="og:title" content="دوره جامع مهارت‌های هفتگانه کامپیوتر (ICDL) ویژه بازار کار">
-  <meta property="og:description" content="آموزش صفر تا صد کامپیوتر و اداری با مدرک رسمی سازمان آموزش فنی و حرفه‌ای کشور در دو شعبه تهران. پرداخت اقساطی و کارگاه‌های مجهز.">
+  <meta property="og:description" content="آموزش صفر تا صد کامپیوتر و اداری با مدرک رسمی سازمان آموزش فنی و حرفه‌ای کشور در دو شیوه حضوری و مجازی.">
   <meta property="og:image" content="assets/img/Maheryar_heder.png">
 
   <!-- PWA & Mobile Web App Meta -->
@@ -35,7 +35,10 @@
 
   <!-- Local Stylesheets (Zero CDN) -->
   <link rel="stylesheet" href="assets/css/fontiran.css">
+  <link rel="stylesheet" href="assets/vendor/css/all.min.css">
   <link rel="stylesheet" href="assets/vendor/css/swiper-bundle.min.css">
+  <link rel="stylesheet" href="assets/vendor/css/sweetalert2.min.css">
+  <link rel="stylesheet" href="assets/vendor/css/toastify.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 
   <!-- Schema.org JSON-LD Course Structured Data -->
@@ -63,62 +66,16 @@
           {
             "@type": "CourseInstance",
             "courseMode": "onsite",
-            "location": "شعبه ۱ تهران: خیابان مرتضوی، سرای محله مرتضوی",
-            "courseSchedule": {
-              "@type": "Schedule",
-              "repeatFrequency": "P1W",
-              "byDay": ["Saturday", "Monday", "Wednesday"],
-              "startTime": "17:00",
-              "endTime": "19:30"
-            }
+            "location": "شعبه ۱ تهران: خیابان مرتضوی، سرای محله مرتضوی"
           },
           {
             "@type": "CourseInstance",
             "courseMode": "onsite",
-            "location": "شعبه ۲ تهران: اسکندری جنوبی، سرای محله اسکندری",
-            "courseSchedule": {
-              "@type": "Schedule",
-              "repeatFrequency": "P1W",
-              "byDay": ["Sunday", "Tuesday"],
-              "startTime": "10:00",
-              "endTime": "12:30"
-            }
-          }
-        ],
-        "offers": {
-          "@type": "Offer",
-          "category": "Vocational Training",
-          "priceCurrency": "IRR",
-          "availability": "https://schema.org/InStock",
-          "validFrom": "2026-10-01"
-        }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "صفحه اصلی",
-            "item": "https://maheryar.ir/index.html"
+            "location": "شعبه ۲ تهران: اسکندری جنوبی، سرای محله اسکندری"
           },
           {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "دوره‌های آموزشی",
-            "item": "https://maheryar.ir/index.html#courses"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "فناوری اطلاعات",
-            "item": "https://maheryar.ir/index.html#categories"
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "مهارت‌های هفتگانه کامپیوتر (ICDL)",
-            "item": "https://maheryar.ir/course-single.html"
+            "@type": "CourseInstance",
+            "courseMode": "online"
           }
         ]
       }
@@ -132,17 +89,17 @@
   <aside class="top-bar" aria-label="اعلامیه‌ها">
     <div class="container top-bar-inner">
       <div class="top-bar-notice">
-        <span class="tvto-badge-small">مجوز رسمی فنی و حرفه‌ای</span>
-        <span>اعطای مدرک رسمی بین‌المللی با کد استاندارد ایسکو (ISCO) | امکان پرداخت اقساطی شهریه</span>
+        <span class="tvto-badge-small"><i class="fa-solid fa-certificate"></i> دارای مجوز رسمی سازمان فنی و حرفه‌ای (تأسیس ۱۴۰۱)</span>
+        <span style="font-size:0.8rem;opacity:0.9;">اعطای مدرک رسمی بین‌المللی با کد ایسکو (ISCO) | پرداخت اقساطی شهریه</span>
       </div>
       <div class="top-bar-contacts">
-        <a href="tel:09030411617" class="top-bar-link">
-          <i data-lucide="phone-call" style="width:14px;height:14px;"></i>
-          <span>مشاوره و ثبت‌نام: ۰۹۰۳۰۴۱۱۶۱۷</span>
+        <a href="https://wa.me/989030411617" target="_blank" rel="noopener noreferrer" class="top-bar-link">
+          <i class="fa-brands fa-whatsapp" style="color:#25d366;font-size:1rem;"></i>
+          <span>پشتیبانی واتساپ و بله: ۰۹۰۳۰۴۱۱۶۱۷</span>
         </a>
-        <a href="https://ble.ir/maheryar1400" target="_blank" rel="noopener noreferrer" class="top-bar-link">
-          <i data-lucide="message-square" style="width:14px;height:14px;"></i>
-          <span>پاسخگویی بله: maheryar1400@</span>
+        <a href="tel:09030411617" class="top-bar-link">
+          <i class="fa-solid fa-phone" style="font-size:0.85rem;"></i>
+          <span>تماس: ۰۹۰۳۰۴۱۱۶۱۷</span>
         </a>
       </div>
     </div>
@@ -152,100 +109,60 @@
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
       <a href="./index.html" class="header-brand" aria-label="آموزشگاه فنی و حرفه‌ای ماهریار">
-        <img src="assets/img/Logo-Icon.svg" alt="ماهریار" class="brand-logo-img" width="46" height="46">
+        <img src="assets/img/Logo-Icon.svg" alt="ماهریار" class="brand-logo-img" width="44" height="44">
         <div class="brand-info">
           <span class="brand-title">ماهریار</span>
-          <span class="brand-subtitle">آموزشگاه فنی و حرفه‌ای آزاد</span>
+          <span class="brand-subtitle">آموزشگاه فنی و حرفه‌ای آزاد (تأسیس ۱۴۰۱)</span>
         </div>
       </a>
 
       <nav class="nav-menu" aria-label="منوی سایت">
         <div class="nav-item">
-          <a href="./index.html" class="nav-link">
-            <i data-lucide="home" style="width:17px;height:17px;"></i>
-            <span>صفحه اصلی</span>
-          </a>
+          <a href="./index.html" class="nav-link">صفحه اصلی</a>
         </div>
         <div class="nav-item">
-          <a href="./index.html#courses" class="nav-link active">
-            <i data-lucide="book-open" style="width:17px;height:17px;"></i>
-            <span>دوره‌های آموزشی</span>
-          </a>
+          <a href="./index.html#courses" class="nav-link active">دوره‌های آموزشی</a>
         </div>
         <div class="nav-item">
-          <a href="./index.html#why" class="nav-link">
-            <i data-lucide="award" style="width:17px;height:17px;"></i>
-            <span>مزایای مدرک</span>
-          </a>
+          <a href="./index.html#modes" class="nav-link">حضوری و مجازی</a>
         </div>
         <div class="nav-item">
-          <a href="./index.html#instructors" class="nav-link">
-            <i data-lucide="users" style="width:17px;height:17px;"></i>
-            <span>اساتید و مربیان</span>
-          </a>
+          <a href="./index.html#instructors" class="nav-link">اساتید</a>
         </div>
         <div class="nav-item">
-          <a href="./index.html#branches" class="nav-link">
-            <i data-lucide="map-pin" style="width:17px;height:17px;"></i>
-            <span>شعب تهران</span>
-          </a>
+          <a href="./index.html#branches" class="nav-link">شعب تهران</a>
+        </div>
+        <div class="nav-item">
+          <a href="./index.html#testimonials" class="nav-link">نظرات</a>
         </div>
       </nav>
 
       <div class="header-actions">
         <div class="tvto-seal-header">
-          <img src="assets/img/logo-irantvto.png" alt="آرم فنی و حرفه ای" width="32" height="32">
-          <span>دارای مجوز رسمی<br>فنی و حرفه‌ای</span>
+          <img src="assets/img/logo-irantvto.png" alt="آرم فنی و حرفه ای" width="30" height="30">
+          <span>مجوز رسمی<br>فنی و حرفه‌ای</span>
         </div>
         <a href="#consultationModal" class="btn btn-primary btn-sm btn-open-consultation" data-course-name="مهارت‌های هفتگانه کامپیوتر (ICDL)">
-          <i data-lucide="sparkles" style="width:16px;height:16px;"></i>
+          <i class="fa-solid fa-headset"></i>
           <span>مشاوره و ثبت‌نام</span>
         </a>
         <button type="button" class="btn-mobile-menu" id="btnOpenMobileMenu" aria-label="منوی موبایل">
-          <i data-lucide="menu" style="width:24px;height:24px;"></i>
+          <i class="fa-solid fa-bars"></i>
         </button>
       </div>
     </div>
   </header>
-
-  <!-- Mobile Off-Canvas Drawer -->
-  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
-  <aside class="mobile-drawer" id="mobileDrawer">
-    <div class="drawer-header">
-      <div class="header-brand">
-        <img src="assets/img/Logo-Icon.svg" alt="ماهریار" class="brand-logo-img" width="38" height="38">
-        <div class="brand-info">
-          <span class="brand-title" style="font-size:1.2rem;">ماهریار</span>
-          <span class="brand-subtitle">آموزشگاه فنی و حرفه‌ای آزاد</span>
-        </div>
-      </div>
-      <button type="button" class="btn-icon" id="btnCloseMobileMenu" aria-label="بستن">
-        <i data-lucide="x" style="width:22px;height:22px;"></i>
-      </button>
-    </div>
-    <div class="drawer-body">
-      <nav class="drawer-nav-list">
-        <a href="./index.html" class="drawer-link"><i data-lucide="home"></i> صفحه اصلی</a>
-        <a href="./index.html#courses" class="drawer-link active"><i data-lucide="book-open"></i> لیست همه دوره‌ها</a>
-        <a href="./index.html#instructors" class="drawer-link"><i data-lucide="users"></i> اساتید ماهریار</a>
-        <a href="./index.html#branches" class="drawer-link"><i data-lucide="map-pin"></i> شعب و لوکیشن</a>
-      </nav>
-      <a href="#consultationModal" class="btn btn-primary btn-open-consultation" style="width:100%;margin-bottom:1rem;" data-course-name="مهارت‌های هفتگانه ICDL">
-        <i data-lucide="phone-call"></i> مشاوره این دوره
-      </a>
-    </div>
-  </aside>
 
   <!-- Breadcrumbs -->
   <nav class="breadcrumb-wrapper" aria-label="مسیر راهنما">
     <div class="container">
       <ol class="breadcrumb-list">
         <li class="breadcrumb-item"><a href="./index.html">صفحه اصلی</a></li>
-        <li class="breadcrumb-separator"><i data-lucide="chevron-left" style="width:14px;height:14px;"></i></li>
+        <li class="breadcrumb-separator"><i class="fa-solid fa-angle-left"></i></li>
         <li class="breadcrumb-item"><a href="./index.html#courses">دوره‌های آموزشی</a></li>
-        <li class="breadcrumb-separator"><i data-lucide="chevron-left" style="width:14px;height:14px;"></i></li>
+        <li class="breadcrumb-separator"><i class="fa-solid fa-angle-left"></i></li>
         <li class="breadcrumb-item"><a href="./index.html#categories">فناوری اطلاعات و ارتباطات</a></li>
-        <li class="breadcrumb-separator"><i data-lucide="chevron-left" style="width:14px;height:14px;"></i></li>
+        <li class="breadcrumb-separator"><i class="fa-solid fa-angle-left"></i></li>
         <li class="breadcrumb-item active" aria-current="page">دوره جامع مهارت‌های هفتگانه کامپیوتر (ICDL)</li>
       </ol>
     </div>
@@ -259,45 +176,36 @@
       <div class="container">
         
         <div class="course-hero-badges">
-          <span class="badge badge-primary">
-            <i data-lucide="shield-check" style="width:14px;height:14px;"></i>
-            <span>کد استاندارد ملی و بین‌المللی ایسکو (ISCO)</span>
-          </span>
-          <span class="badge badge-success">
-            <i data-lucide="check-circle" style="width:14px;height:14px;"></i>
-            <span>اعطای گواهینامه معتبر قابل ترجمه</span>
-          </span>
-          <span class="badge badge-accent">
-            <i data-lucide="credit-card" style="width:14px;height:14px;"></i>
-            <span>پرداخت اقساطی شهریه</span>
-          </span>
+          <span class="badge badge-primary"><i class="fa-solid fa-certificate"></i> کد استاندارد بین‌المللی ایسکو (ISCO)</span>
+          <span class="badge badge-success"><i class="fa-solid fa-circle-check"></i> گواهینامه معتبر قابل ترجمه</span>
+          <span class="badge badge-accent"><i class="fa-solid fa-credit-card"></i> شهریه اقساطی بدون کارمزد</span>
         </div>
 
         <h1 class="course-hero-title">دوره جامع مهارت‌های هفتگانه کامپیوتر (ICDL ویژه بازار کار و امور اداری)</h1>
         
         <p class="course-hero-lead">
-          آموزش جامع و پروژه محور ۷ مهارت بنیادین کامپیوتر بر اساس آخرین سرفصل‌های مصوب سازمان آموزش فنی و حرفه‌ای کشور. مناسب جهت استخدام در کلیه ارگان‌های دولتی و شرکت‌های خصوصی، ارتقای شغلی و ارائه گواهینامه بین‌المللی برای مهاجرت کاری.
+          آموزش جامع و پروژه محور ۷ مهارت بنیادین کامپیوتر بر اساس آخرین سرفصل‌های مصوب سازمان آموزش فنی و حرفه‌ای کشور. مناسب جهت استخدام در کلیه ارگان‌های دولتی و شرکت‌های خصوصی، ارتقای شغلی و مهاجرت کاری.
         </p>
 
         <div class="course-hero-meta-grid">
           <div class="hero-meta-item">
-            <div class="hero-meta-icon"><i data-lucide="clock" style="width:18px;height:18px;"></i></div>
+            <div class="hero-meta-icon"><i class="fa-solid fa-clock"></i></div>
             <div>
-              <span style="font-size:0.75rem;color:var(--color-text-muted);display:block;">طول دوره آموزشی:</span>
+              <span style="font-size:0.75rem;color:var(--color-text-muted);display:block;">طول دوره:</span>
               <span>۱۳۰ ساعت (تئوری + کارگاه عملی)</span>
             </div>
           </div>
 
           <div class="hero-meta-item">
-            <div class="hero-meta-icon"><i data-lucide="map-pin" style="width:18px;height:18px;"></i></div>
+            <div class="hero-meta-icon"><i class="fa-solid fa-laptop-code"></i></div>
             <div>
-              <span style="font-size:0.75rem;color:var(--color-text-muted);display:block;">محل تشکیل کلاس‌ها:</span>
-              <span>حضوری در هر دو شعبه (مرتضوی و اسکندری)</span>
+              <span style="font-size:0.75rem;color:var(--color-text-muted);display:block;">نحوه برگزاری:</span>
+              <span>حضوری (شعب ۱ و ۲) و آنلاین</span>
             </div>
           </div>
 
           <div class="hero-meta-item">
-            <div class="hero-meta-icon"><i data-lucide="bar-chart" style="width:18px;height:18px;"></i></div>
+            <div class="hero-meta-icon"><i class="fa-solid fa-chart-line"></i></div>
             <div>
               <span style="font-size:0.75rem;color:var(--color-text-muted);display:block;">سطح برگزاری:</span>
               <span>از صفر و پایه تا سطح پیشرفته شغلی</span>
@@ -305,7 +213,7 @@
           </div>
 
           <div class="hero-meta-item">
-            <div class="hero-meta-icon"><i data-lucide="award" style="width:18px;height:18px;"></i></div>
+            <div class="hero-meta-icon"><i class="fa-solid fa-award"></i></div>
             <div>
               <span style="font-size:0.75rem;color:var(--color-text-muted);display:block;">مدرک پایان دوره:</span>
               <span>بین‌المللی سازمان آموزش فنی و حرفه‌ای</span>
@@ -321,10 +229,8 @@
       <div class="container">
         <div class="course-layout-grid">
           
-          <!-- Course Main Content (Right Side in RTL) -->
           <div class="course-main-content">
             
-            <!-- Quick In-Page Sticky Tabs Navigation -->
             <nav class="course-nav-bar" aria-label="فهرست محتوای دوره">
               <a href="#overview" class="course-nav-tab active">معرفی دوره</a>
               <a href="#curriculum" class="course-nav-tab">سرفصل‌های مصوب</a>
@@ -337,14 +243,14 @@
             <!-- Block 1: Overview -->
             <article class="course-block" id="overview">
               <h2 class="course-block-title">
-                <i data-lucide="info"></i>
+                <i class="fa-solid fa-circle-info"></i>
                 <span>معرفی دوره و اهمیت مدرک رسمی ICDL</span>
               </h2>
               <p class="course-block-text">
-                مدرک <strong>ICDL (International Computer Driving Licence)</strong> یا گواهینامه بین‌المللی کاربری رایانه، معتبرترین استاندارد جهانی در ارزیابی و اثبات مهارت‌های کاربردی کامپیوتر در محیط کار است. در کشور ما، داشتن این مدرک رسمی از سازمان آموزش فنی و حرفه‌ای کشور، شرط لازم برای استخدام در تمامی آزمون‌های استخدامی دستگاه‌های اجرایی، بانک‌ها، آموزش و پرورش و شرکت‌های معتبر خصوصی به شمار می‌رود.
+                مدرک <strong>ICDL (International Computer Driving Licence)</strong> معتبرترین استاندارد جهانی در اثبات مهارت‌های کاربردی کامپیوتر در محیط کار است. داشتن این مدرک رسمی از سازمان آموزش فنی و حرفه‌ای کشور، شرط لازم برای استخدام در دستگاه‌های اجرایی، بانک‌ها و شرکت‌های معتبر به شمار می‌رود.
               </p>
               <p class="course-block-text">
-                در آموزشگاه ماهریار، این دوره فراتر از تئوری‌های کتابی و به صورت <strong>کاملاً کارگاهی و مبتنی بر پرونده‌ها و فرم‌های واقعی بازار کار</strong> تدریس می‌شود. کارآموزان در سایت مجهز کامپیوتری هر دو شعبه (خیابان مرتضوی و خیابان اسکندری)، به صورت انفرادی پشت سیستم قرار گرفته و از کار با نرم‌افزارهای ورد و اکسل گرفته تا نامه‌نگاری اداری و فرمول‌نویسی حقوق و دستمزد را به صورت عملی تمرین می‌کنند.
+                در آموزشگاه ماهریار، این دوره به صورت <strong>کاملاً کارگاهی (حضوری در شعب ۱ و ۲ تهران یا کلاس‌های آنلاین تعاملی)</strong> تدریس می‌شود و کارآموزان پروژه‌های واقعی نامه‌نگاری، فرمول‌نویسی اکسل و گزارش‌گیری را تمرین می‌کنند.
               </p>
 
               <h3 style="font-size:1.1rem;font-weight:800;color:var(--color-text-main);margin-top:1.5rem;margin-bottom:0.75rem;">
@@ -352,27 +258,27 @@
               </h3>
               <div class="achievements-grid">
                 <div class="achievement-item">
-                  <i data-lucide="check-circle-2"></i>
-                  <span>تسلط کامل بر کاربری سیستم‌عامل ویندوز و مدیریت فایل‌ها</span>
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span>تسلط کامل بر کاربری ویندوز ۱۱ و مدیریت فایل‌ها</span>
                 </div>
                 <div class="achievement-item">
-                  <i data-lucide="check-circle-2"></i>
+                  <i class="fa-solid fa-circle-check"></i>
                   <span>تایپ سریع، صفحه‌آرایی کتب، مقالات و نامه‌های اداری در Word</span>
                 </div>
                 <div class="achievement-item">
-                  <i data-lucide="check-circle-2"></i>
-                  <span>فرمول‌نویسی، رسم نمودارهای مدیریتی و گزارش‌گیری در Excel</span>
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span>فرمول‌نویسی، جداول محوری و گزارش‌گیری در Excel</span>
                 </div>
                 <div class="achievement-item">
-                  <i data-lucide="check-circle-2"></i>
-                  <span>ساخت اسلایدهای جذاب سخنرانی و جلسات کاری در PowerPoint</span>
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span>ساخت اسلایدهای جذاب سخنرانی در PowerPoint</span>
                 </div>
                 <div class="achievement-item">
-                  <i data-lucide="check-circle-2"></i>
+                  <i class="fa-solid fa-circle-check"></i>
                   <span>طراحی بانک‌های اطلاعاتی و مدیریت داده‌ها در Access</span>
                 </div>
                 <div class="achievement-item">
-                  <i data-lucide="check-circle-2"></i>
+                  <i class="fa-solid fa-circle-check"></i>
                   <span>دریافت گواهینامه معتبر قابل ترجمه با قابلیت استعلام آنلاین</span>
                 </div>
               </div>
@@ -381,209 +287,153 @@
             <!-- Block 2: Official TVTO Curriculum Accordion -->
             <article class="course-block" id="curriculum">
               <h2 class="course-block-title">
-                <i data-lucide="list-checks"></i>
+                <i class="fa-solid fa-list-check"></i>
                 <span>سرفصل‌های مصوب سازمان آموزش فنی و حرفه‌ای (۷ مهارت)</span>
               </h2>
-              <p class="course-block-text">
-                سرفصل‌های آموزشی این دوره بر اساس آخرین ویرایش استاندارد بین‌المللی و آزمون‌های رسمی فنی و حرفه‌ای تنظیم شده است:
-              </p>
 
               <div class="curriculum-list">
-                
-                <!-- Module 1 -->
                 <div class="curriculum-module">
                   <div class="module-header">
                     <div class="module-title-wrap">
                       <span class="module-num">۱</span>
                       <span class="module-title">مفاهیم پایه فناوری اطلاعات و سخت‌افزار (IT Concepts)</span>
                     </div>
-                    <div class="module-meta">
-                      <span>۱۵ ساعت</span>
-                      <i data-lucide="chevron-down" style="width:16px;height:16px;"></i>
-                    </div>
+                    <div class="module-meta"><span>۱۵ ساعت</span> <i class="fa-solid fa-chevron-down"></i></div>
                   </div>
                   <div class="module-body">
                     <div class="module-lessons-list">
                       <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> آشنایی با اجزای اصلی کامپیوتر، پردازنده، حافظه‌ها و پورت‌ها</span>
+                        <span class="lesson-title-area"><i class="fa-regular fa-circle-play"></i> اجزای اصلی کامپیوتر، پردازنده، حافظه‌ها و پورت‌ها</span>
                         <span>کارگاهی</span>
                       </div>
                       <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> انواع نرم‌افزارها، سیستم‌عامل‌ها و بدافزارها و راهکارهای امنیت اطلاعات</span>
+                        <span class="lesson-title-area"><i class="fa-regular fa-circle-play"></i> انواع نرم‌افزارها، سیستم‌عامل‌ها و امنیت اطلاعات</span>
                         <span>پروژه‌محور</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Module 2 -->
                 <div class="curriculum-module">
                   <div class="module-header">
                     <div class="module-title-wrap">
                       <span class="module-num">۲</span>
-                      <span class="module-title">سیستم‌عامل ویندوز و مدیریت فایل‌ها (Windows OS & File Management)</span>
+                      <span class="module-title">سیستم‌عامل ویندوز و مدیریت فایل‌ها (Windows 11)</span>
                     </div>
-                    <div class="module-meta">
-                      <span>۲۰ ساعت</span>
-                      <i data-lucide="chevron-down" style="width:16px;height:16px;"></i>
-                    </div>
+                    <div class="module-meta"><span>۲۰ ساعت</span> <i class="fa-solid fa-chevron-down"></i></div>
                   </div>
                   <div class="module-body">
                     <div class="module-lessons-list">
                       <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> محیط کاربری ویندوز ۱۱ و شخصی‌سازی تنظیمات Control Panel و Settings</span>
-                        <span>کارگاهی</span>
+                        <span class="lesson-title-area"><i class="fa-regular fa-circle-play"></i> محیط کاربری ویندوز ۱۱ و تنظیمات Control Panel</span>
+                        <span>عملی</span>
                       </div>
                       <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> مدیریت حرفه‌ای فایل‌ها، فولدرها، فشرده‌سازی و پشتیبان‌گیری اطلاعات</span>
-                        <span>تمرین عملی</span>
+                        <span class="lesson-title-area"><i class="fa-regular fa-circle-play"></i> مدیریت فایل‌ها، فشرده‌سازی و پشتیبان‌گیری</span>
+                        <span>تمرین کارگاهی</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Module 3 -->
                 <div class="curriculum-module">
                   <div class="module-header">
                     <div class="module-title-wrap">
                       <span class="module-num">۳</span>
-                      <span class="module-title">اینترنت، وب‌گردی و ارتباطات آنلاین (Web & Communication)</span>
+                      <span class="module-title">اینترنت، وب و ارتباطات امن (Internet & Communication)</span>
                     </div>
-                    <div class="module-meta">
-                      <span>۱۵ ساعت</span>
-                      <i data-lucide="chevron-down" style="width:16px;height:16px;"></i>
-                    </div>
+                    <div class="module-meta"><span>۱۵ ساعت</span> <i class="fa-solid fa-chevron-down"></i></div>
                   </div>
                   <div class="module-body">
                     <div class="module-lessons-list">
                       <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> جستجوی پیشرفته در گوگل و پایگاه‌های علمی و اداری</span>
-                        <span>کارگاهی</span>
-                      </div>
-                      <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> مدیریت ایمیل اداری (Outlook / Gmail) و نکات امنیتی در فضای مجازی</span>
+                        <span class="lesson-title-area"><i class="fa-regular fa-circle-play"></i> جستجوی پیشرفته، امنیت حساب‌ها و ابزارهای ایمیل اداری</span>
                         <span>کاربردی</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Module 4 -->
                 <div class="curriculum-module">
                   <div class="module-header">
                     <div class="module-title-wrap">
                       <span class="module-num">۴</span>
-                      <span class="module-title">واژه‌پرداز مایکروسافت ورد کاربردی (Microsoft Word for Office)</span>
+                      <span class="module-title">واژه‌پرداز مایکروسافت ورد اداری (Microsoft Word)</span>
                     </div>
-                    <div class="module-meta">
-                      <span>۲۵ ساعت</span>
-                      <i data-lucide="chevron-down" style="width:16px;height:16px;"></i>
-                    </div>
+                    <div class="module-meta"><span>۲۵ ساعت</span> <i class="fa-solid fa-chevron-down"></i></div>
                   </div>
                   <div class="module-body">
                     <div class="module-lessons-list">
                       <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> نگارش نامه‌های رسمی، فونت‌های استاندارد فارسی، جدول‌بندی و کادربندی</span>
-                        <span>حل مسئله</span>
-                      </div>
-                      <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> صفحه‌آرایی پایان‌نامه و گزارش، فهرست‌نویسی خودکار و ادغام پستی (Mail Merge)</span>
-                        <span>پروژه کلاسی</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Module 5 -->
-                <div class="curriculum-module">
-                  <div class="module-header">
-                    <div class="module-title-wrap">
-                      <span class="module-num">۵</span>
-                      <span class="module-title">صفحه گسترده اکسل در محیط اداری و مالی (Microsoft Excel)</span>
-                    </div>
-                    <div class="module-meta">
-                      <span>۲۵ ساعت</span>
-                      <i data-lucide="chevron-down" style="width:16px;height:16px;"></i>
-                    </div>
-                  </div>
-                  <div class="module-body">
-                    <div class="module-lessons-list">
-                      <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> فرمول‌نویسی توابع پرکاربرد اداری (IF, VLOOKUP, SUMIFS, COUNTIFS)</span>
-                        <span>کارگاهی</span>
-                      </div>
-                      <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> فیلتر پیشرفته، جداول محوری (Pivot Table) و رسم نمودارهای تحلیلی کسب‌وکار</span>
+                        <span class="lesson-title-area"><i class="fa-regular fa-circle-play"></i> نگارش نامه‌های رسمی، فونت‌های استاندارد فارسی، فهرست‌نویسی و ادغام پستی</span>
                         <span>پروژه‌محور</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Module 6 -->
+                <div class="curriculum-module">
+                  <div class="module-header">
+                    <div class="module-title-wrap">
+                      <span class="module-num">۵</span>
+                      <span class="module-title">صفحه گسترده اکسل اداری و مالی (Microsoft Excel)</span>
+                    </div>
+                    <div class="module-meta"><span>۲۵ ساعت</span> <i class="fa-solid fa-chevron-down"></i></div>
+                  </div>
+                  <div class="module-body">
+                    <div class="module-lessons-list">
+                      <div class="lesson-row">
+                        <span class="lesson-title-area"><i class="fa-regular fa-circle-play"></i> توابع پرکاربرد (IF, VLOOKUP, SUMIFS, Pivot Tables)</span>
+                        <span>حل مسئله</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="curriculum-module">
                   <div class="module-header">
                     <div class="module-title-wrap">
                       <span class="module-num">۶</span>
                       <span class="module-title">پایگاه‌داده اکسس (Microsoft Access)</span>
                     </div>
-                    <div class="module-meta">
-                      <span>۱۵ ساعت</span>
-                      <i data-lucide="chevron-down" style="width:16px;height:16px;"></i>
-                    </div>
+                    <div class="module-meta"><span>۱۵ ساعت</span> <i class="fa-solid fa-chevron-down"></i></div>
                   </div>
                   <div class="module-body">
                     <div class="module-lessons-list">
                       <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> طراحی جداول و برقراری روابط (Relationships) بین داده‌ها</span>
+                        <span class="lesson-title-area"><i class="fa-regular fa-circle-play"></i> طراحی جداول، پرس‌وجوها (Queries)، فرم‌ها و گزارش‌ها</span>
                         <span>کارگاهی</span>
-                      </div>
-                      <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> ساخت فرم‌های ورود اطلاعات (Forms) و گزارش‌گیری چاپی (Reports)</span>
-                        <span>عملی</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Module 7 -->
                 <div class="curriculum-module">
                   <div class="module-header">
                     <div class="module-title-wrap">
                       <span class="module-num">۷</span>
-                      <span class="module-title">ارائه‌مطلب و پرزنتیشن با پاورپوینت (Microsoft PowerPoint)</span>
+                      <span class="module-title">ارائه‌مطلب با پاورپوینت (Microsoft PowerPoint)</span>
                     </div>
-                    <div class="module-meta">
-                      <span>۱۵ ساعت</span>
-                      <i data-lucide="chevron-down" style="width:16px;height:16px;"></i>
-                    </div>
+                    <div class="module-meta"><span>۱۵ ساعت</span> <i class="fa-solid fa-chevron-down"></i></div>
                   </div>
                   <div class="module-body">
                     <div class="module-lessons-list">
                       <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> طراحی اسلایدهای مدرن، اینفوگرافیک و درج ویدیو و صدا</span>
-                        <span>کارگاهی</span>
-                      </div>
-                      <div class="lesson-row">
-                        <span class="lesson-title-area"><i data-lucide="play-circle"></i> متحرک‌سازی پیشرفته (Transitions & Animations) و تکنیک‌های ارائه موفق</span>
+                        <span class="lesson-title-area"><i class="fa-regular fa-circle-play"></i> اسلایدهای اینفوگرافیک، انیمیشن‌های حرفه‌ای و ارائه‌های سازمانی</span>
                         <span>ارائه زنده</span>
                       </div>
                     </div>
                   </div>
                 </div>
-
               </div>
             </article>
 
             <!-- Block 3: Schedule / Batches -->
             <article class="course-block" id="batches">
               <h2 class="course-block-title">
-                <i data-lucide="calendar"></i>
+                <i class="fa-solid fa-calendar-days"></i>
                 <span>تقویم و زمان‌بندی کدهای در حال ثبت‌نام</span>
               </h2>
-              <p class="course-block-text">
-                با توجه به شاغل بودن بسیاری از کارآموزان، دوره‌ها در زمان‌های صبح، عصر و روزهای آخر هفته در دو شعبه مرتضوی و اسکندری برگزار می‌شوند:
-              </p>
 
               <div class="batch-table-wrapper">
                 <table class="batch-table">
@@ -604,9 +454,7 @@
                       <td>۱۷:۰۰ الی ۱۹:۳۰</td>
                       <td>شعبه ۱ (مرتضوی)</td>
                       <td><span class="badge badge-success">در حال ثبت‌نام (۴ نفر)</span></td>
-                      <td>
-                        <a href="#consultationModal" class="btn btn-primary btn-sm btn-open-consultation" data-course-name="ICDL کد A مرتضوی">رزرو صندلی</a>
-                      </td>
+                      <td><a href="#consultationModal" class="btn btn-primary btn-sm btn-open-consultation" data-course-name="ICDL کد A مرتضوی">رزرو صندلی</a></td>
                     </tr>
                     <tr>
                       <td><strong>کد B (صبح)</strong></td>
@@ -614,19 +462,15 @@
                       <td>۱۰:۰۰ الی ۱۲:۳۰</td>
                       <td>شعبه ۲ (اسکندری)</td>
                       <td><span class="badge badge-success">در حال ثبت‌نام (۶ نفر)</span></td>
-                      <td>
-                        <a href="#consultationModal" class="btn btn-primary btn-sm btn-open-consultation" data-course-name="ICDL کد B اسکندری">رزرو صندلی</a>
-                      </td>
+                      <td><a href="#consultationModal" class="btn btn-primary btn-sm btn-open-consultation" data-course-name="ICDL کد B اسکندری">رزرو صندلی</a></td>
                     </tr>
                     <tr>
-                      <td><strong>کد C (شاغلین)</strong></td>
-                      <td>پنجشنبه‌ها و جمعه‌ها</td>
+                      <td><strong>کد C (آنلاین)</strong></td>
+                      <td>پنجشنبه و جمعه</td>
                       <td>۱۴:۰۰ الی ۱۸:۰۰</td>
-                      <td>شعبه ۱ (مرتضوی)</td>
-                      <td><span class="badge badge-accent">ظرفیت محدود (۲ نفر)</span></td>
-                      <td>
-                        <a href="#consultationModal" class="btn btn-primary btn-sm btn-open-consultation" data-course-name="ICDL کد C شاغلین">رزرو صندلی</a>
-                      </td>
+                      <td>کلاس مجازی تعاملی</td>
+                      <td><span class="badge badge-accent">ظرفیت محدود</span></td>
+                      <td><a href="#consultationModal" class="btn btn-primary btn-sm btn-open-consultation" data-course-name="ICDL کد C مجازی">رزرو دوره آنلاین</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -636,28 +480,24 @@
             <!-- Block 4: Official Certificate -->
             <article class="course-block" id="certificate">
               <h2 class="course-block-title">
-                <i data-lucide="award"></i>
+                <i class="fa-solid fa-award"></i>
                 <span>ویژگی‌های گواهینامه بین‌المللی اعطایی</span>
               </h2>
 
               <div class="cert-detailed-box">
-                <img src="assets/img/logo-irantvto.png" alt="لوگو رسمی سازمان آموزش فنی و حرفه ای کشور" class="cert-logo-big" width="110" height="110">
+                <img src="assets/img/logo-irantvto.png" alt="لوگو سازمان فنی و حرفه ای" class="cert-logo-big" width="100" height="100">
                 <div class="cert-features-list">
                   <div class="cert-feat-row">
-                    <i data-lucide="check-circle-2"></i>
-                    <span><strong>شناسه ملی و کد بین‌المللی ایسکو (ISCO-08):</strong> این مدرک دارای کد مهارت جهانی استاندارد بین‌المللی است.</span>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span><strong>کد بین‌المللی ایسکو (ISCO-08):</strong> استاندارد جهانی مهارت شغلی.</span>
                   </div>
                   <div class="cert-feat-row">
-                    <i data-lucide="check-circle-2"></i>
-                    <span><strong>قابلیت ترجمه رسمی:</strong> بدون نیاز به گذراندن آزمون مجدد، قابلیت ترجمه رسمی با مهر دادگستری و وزارت امور خارجه جهت ارائه به سفارتخانه‌ها و کارفرمایان بین‌المللی را دارد.</span>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span><strong>قابلیت ترجمه رسمی:</strong> با تایید دادگستری و وزارت امور خارجه جهت مهاجرت کاری.</span>
                   </div>
                   <div class="cert-feat-row">
-                    <i data-lucide="check-circle-2"></i>
-                    <span><strong>استعلام برخط کشوری:</strong> مدرک به صورت الکترونیکی در پورتال سازمان فنی و حرفه‌ای (portaltvto.com) ثبت و با بارکد قابل استعلام است.</span>
-                  </div>
-                  <div class="cert-feat-row">
-                    <i data-lucide="check-circle-2"></i>
-                    <span><strong>امتیاز استخدام و ارتقای رتبه:</strong> دارای بالاترین امتیاز در آزمون‌های استخدامی اداری و سازمانی کل کشور.</span>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span><strong>استعلام برخط کشوری:</strong> در سامانه رسمی پورتال فنی و حرفه‌ای (portaltvto.com).</span>
                   </div>
                 </div>
               </div>
@@ -666,23 +506,19 @@
             <!-- Block 5: Instructor -->
             <article class="course-block" id="instructor">
               <h2 class="course-block-title">
-                <i data-lucide="user"></i>
+                <i class="fa-solid fa-user-tie"></i>
                 <span>مربی و استاد دوره</span>
               </h2>
               <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
                 <div class="instructor-photo-wrapper" style="margin-bottom:0;">
-                  <div class="instructor-photo">
-                    <i data-lucide="user-round" style="width:50px;height:50px;"></i>
-                  </div>
-                  <div class="instructor-badge-seal" title="مربی رسمی">
-                    <i data-lucide="badge-check" style="width:18px;height:18px;"></i>
-                  </div>
+                  <div class="instructor-photo"><i class="fa-solid fa-user" style="font-size:2.5rem;"></i></div>
+                  <div class="instructor-badge-seal"><i class="fa-solid fa-check"></i></div>
                 </div>
                 <div>
                   <h3 style="font-size:1.25rem;font-weight:900;color:var(--color-text-main);margin-bottom:0.25rem;">مهندس مجید موسوی</h3>
-                  <p style="font-size:0.86rem;font-weight:700;color:var(--color-primary);margin-bottom:0.5rem;">مدیر دپارتمان فناوری اطلاعات و ارتباطات آموزشگاه ماهریار</p>
+                  <p style="font-size:0.86rem;font-weight:700;color:var(--color-primary);margin-bottom:0.5rem;">مدیر دپارتمان فناوری اطلاعات و ارتباطات ماهریار</p>
                   <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.7;">
-                    بیش از ۱۲ سال سابقه تدریس تخصصی مهارت‌های هفتگانه ICDL و آزمون‌های هماهنگ کشوری سازمان فنی و حرفه‌ای. درصد قبولی کارآموزان ایشان در آزمون کتبی و عملی بالای ۹۶ درصد می‌باشد.
+                    بیش از ۱۲ سال سابقه تدریس تخصصی مهارت‌های هفتگانه ICDL و آزمون‌های هماهنگ کشوری سازمان فنی و حرفه‌ای.
                   </p>
                 </div>
               </div>
@@ -691,7 +527,7 @@
             <!-- Block 6: Course FAQ -->
             <article class="course-block" id="courseFaq">
               <h2 class="course-block-title">
-                <i data-lucide="help-circle"></i>
+                <i class="fa-solid fa-circle-question"></i>
                 <span>سوالات متداول کارآموزان درباره دوره ICDL</span>
               </h2>
 
@@ -699,11 +535,11 @@
                 <div class="faq-item">
                   <button type="button" class="faq-question" aria-expanded="false">
                     <span>نحوه برگزاری آزمون و قبولی در فنی و حرفه‌ای چگونه است؟</span>
-                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
                   </button>
                   <div class="faq-answer">
                     <div class="faq-answer-inner">
-                      آزمون در دو مرحله برگزار می‌شود: مرحله اول آزمون تستی کتبی هماهنگ سازمان آموزش فنی و حرفه‌ای (حداقل نمره قبولی ۵۰ از ۱۰۰) و مرحله دوم آزمون عملی روی سیستم (حداقل نمره قبولی ۷۰ از ۱۰۰). در طول دوره تمام نمونه سوالات آزمون‌های قبلی با کارآموزان تمرین می‌شود.
+                      آزمون در دو مرحله کتبی تستی و آزمون عملی روی سیستم برگزار می‌شود. کلیه نمونه سوالات دوره‌های گذشته با کارآموزان تمرین خواهد شد.
                     </div>
                   </div>
                 </div>
@@ -711,23 +547,11 @@
                 <div class="faq-item">
                   <button type="button" class="faq-question" aria-expanded="false">
                     <span>آیا امکان پرداخت شهریه در چند قسط وجود دارد؟</span>
-                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
                   </button>
                   <div class="faq-answer">
                     <div class="faq-answer-inner">
-                      بله، شهریه دوره را می‌توانید به صورت اقساط ماهانه در ۳ مرحله (هنگام ثبت‌نام، اواسط دوره و پیش از معرفی به آزمون) بدون هیچ‌گونه کارمزد یا ضامن پرداخت نمایید.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="faq-item">
-                  <button type="button" class="faq-question" aria-expanded="false">
-                    <span>اگر سیستم کامپیوتر یا لپ‌تاپ شخصی نداشته باشیم چطور؟</span>
-                    <i data-lucide="chevron-down" class="faq-icon"></i>
-                  </button>
-                  <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                      هیچ مشکلی وجود ندارد! در هر دو شعبه آموزشگاه ماهریار، سایت‌های کامپیوتری مدرن با سیستم‌های اختصاصی برای هر کارآموز مهیاست. علاوه بر ساعات کلاس، امکان استفاده از سایت جهت تمرین آزاد با هماهنگی قبلی فراهم است.
+                      بله، شهریه را می‌توانید در ۳ قسط آسان ماهانه در طول دوره بدون بهره پرداخت کنید.
                     </div>
                   </div>
                 </div>
@@ -736,72 +560,64 @@
 
           </div>
 
-          <!-- Sticky Sidebar Card (Left Side in RTL) -->
+          <!-- Sticky Sidebar Card -->
           <aside class="course-sidebar-column">
             <div class="course-sidebar-card">
               
-              <!-- Thumbnail Banner -->
               <div class="sidebar-thumb-wrapper">
-                <i data-lucide="monitor" class="sidebar-thumb-icon"></i>
+                <i class="fa-solid fa-desktop sidebar-thumb-icon"></i>
                 <div style="position:absolute;top:1rem;right:1rem;">
-                  <span class="badge badge-accent">تخفیف ویژه ثبت‌نام این ماه</span>
+                  <span class="badge badge-accent">تخفیف ویژه ثبت‌نام زودهنگام</span>
                 </div>
               </div>
 
-              <!-- Pricing & Installment Section -->
               <div class="sidebar-pricing-box">
                 <div class="pricing-header-row">
-                  <span class="pricing-label">شهریه مصوب سازمان:</span>
+                  <span class="pricing-label">شهریه مصوب دولتی:</span>
                   <span class="price-main">اقساط ماهانه</span>
                 </div>
                 <div class="installment-banner">
-                  <i data-lucide="shield-check" style="width:16px;height:16px;"></i>
-                  <span>امکان پرداخت در ۳ قسط آسان بدون کارمزد</span>
+                  <i class="fa-solid fa-credit-card"></i>
+                  <span>پرداخت در ۳ قسط آسان بدون کارمزد</span>
                 </div>
               </div>
 
-              <!-- Action Buttons -->
               <div class="sidebar-actions-box">
                 <a href="#consultationModal" class="btn btn-primary btn-lg btn-open-consultation" style="width:100%;" data-course-name="مهارت‌های هفتگانه کامپیوتر (ICDL)">
-                  <i data-lucide="user-plus" style="width:18px;height:18px;"></i>
+                  <i class="fa-solid fa-user-plus"></i>
                   <span>پیش‌ثبت‌نام و رزرو صندلی</span>
                 </a>
 
-                <a href="tel:09030411617" class="btn btn-secondary" style="width:100%;">
-                  <i data-lucide="phone-call" style="width:18px;height:18px;"></i>
-                  <span>مشاوره تلفنی مستقیم: ۰۹۰۳۰۴۱۱۶۱۷</span>
+                <a href="https://wa.me/989030411617" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="width:100%;">
+                  <i class="fa-brands fa-whatsapp" style="color:#25d366;font-size:1.1rem;"></i>
+                  <span>پشتیبانی واتساپ: ۰۹۰۳۰۴۱۱۶۱۷</span>
                 </a>
 
                 <a href="https://ble.ir/maheryar1400" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width:100%;">
                   <img src="assets/img/logo-bale.png" alt="بله" width="18" height="18">
-                  <span>پیام در پیام‌رسان بله</span>
+                  <span>پشتیبانی پیام‌رسان بله</span>
                 </a>
               </div>
 
-              <!-- Course Specs List -->
               <div class="sidebar-specs-list">
                 <div class="spec-row">
-                  <span class="spec-label"><i data-lucide="clock"></i> ساعت آموزش:</span>
+                  <span class="spec-label"><i class="fa-solid fa-clock"></i> ساعت آموزش:</span>
                   <span class="spec-value">۱۳۰ ساعت کارگاهی</span>
                 </div>
                 <div class="spec-row">
-                  <span class="spec-label"><i data-lucide="award"></i> مدرک اعطایی:</span>
+                  <span class="spec-label"><i class="fa-solid fa-award"></i> مدرک اعطایی:</span>
                   <span class="spec-value">بین‌المللی فنی و حرفه‌ای</span>
                 </div>
                 <div class="spec-row">
-                  <span class="spec-label"><i data-lucide="hash"></i> کد استاندارد ISCO:</span>
-                  <span class="spec-value" dir="ltr">2514-2-050</span>
+                  <span class="spec-label"><i class="fa-solid fa-laptop-file"></i> شیوه آموزش:</span>
+                  <span class="spec-value">حضوری و مجازی</span>
                 </div>
                 <div class="spec-row">
-                  <span class="spec-label"><i data-lucide="user-check"></i> پیش‌نیاز:</span>
-                  <span class="spec-value">ندارد (آموزش از پایه)</span>
-                </div>
-                <div class="spec-row">
-                  <span class="spec-label"><i data-lucide="building"></i> شعب برگزارکننده:</span>
+                  <span class="spec-label"><i class="fa-solid fa-building"></i> شعب برگزارکننده:</span>
                   <span class="spec-value">شعبه ۱ و شعبه ۲ تهران</span>
                 </div>
                 <div class="spec-row">
-                  <span class="spec-label"><i data-lucide="users"></i> وضعیت ظرفیت:</span>
+                  <span class="spec-label"><i class="fa-solid fa-users"></i> وضعیت ظرفیت:</span>
                   <span class="spec-value" style="color:var(--color-success);">در حال تکمیل</span>
                 </div>
               </div>
@@ -825,36 +641,36 @@
             <span class="footer-brand-title">آموزشگاه فنی و حرفه‌ای آزاد ماهریار</span>
           </div>
           <p class="footer-about-text">
-            مرکز تخصصی آموزش مهارت‌های بازار کار با اعطای مدرک بین‌المللی سازمان آموزش فنی و حرفه‌ای کشور در دو شعبه مرتضوی (منطقه ۱۰) و اسکندری (منطقه ۱۱) تهران.
+            آموزشگاه ماهریار (تأسیس ۱۴۰۱) با مجوز رسمی سازمان آموزش فنی و حرفه‌ای کشور در دو شعبه مرتضوی (منطقه ۱۰) و اسکندری (منطقه ۱۱) تهران.
           </p>
           <div class="footer-social-links">
-            <a href="https://t.me/maheryar_ac" target="_blank" rel="noopener noreferrer" class="social-link" title="تلگرام"><i data-lucide="send"></i></a>
-            <a href="https://ble.ir/maheryar1400" target="_blank" rel="noopener noreferrer" class="social-link" title="بله"><img src="assets/img/logo-bale.png" alt="بله" width="20" height="20"></a>
-            <a href="https://instagram.com/maheryar_academy" target="_blank" rel="noopener noreferrer" class="social-link" title="اینستاگرام"><i data-lucide="instagram"></i></a>
+            <a href="https://t.me/maheryar_ac" target="_blank" rel="noopener noreferrer" class="social-link" title="کانال تلگرام"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://ble.ir/maheryar1400" target="_blank" rel="noopener noreferrer" class="social-link" title="کانال بله"><img src="assets/img/logo-bale.png" alt="بله" width="20" height="20"></a>
+            <a href="https://instagram.com/maheryar_academy" target="_blank" rel="noopener noreferrer" class="social-link" title="پیج اینستاگرام"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/989030411617" target="_blank" rel="noopener noreferrer" class="social-link" title="واتساپ"><i class="fa-brands fa-whatsapp"></i></a>
           </div>
         </div>
 
         <div>
           <h4 class="footer-col-title">شعب فعال تهران</h4>
           <ul class="footer-links-list">
-            <li class="footer-link-item"><a href="https://nshn.ir/1e_bveNRex4Fh9" target="_blank" rel="noopener noreferrer"><i data-lucide="map-pin"></i> شعبه ۱: مرتضوی بین کارون و جیحون (منطقه ۱۰)</a></li>
-            <li class="footer-link-item"><a href="https://nshn.ir/10_bvgh0yxOc3E" target="_blank" rel="noopener noreferrer"><i data-lucide="map-pin"></i> شعبه ۲: اسکندری جنوبی بین یکم و شکوفه (منطقه ۱۱)</a></li>
-            <li class="footer-link-item"><a href="tel:09030411617"><i data-lucide="phone"></i> مشاوره: ۰۹۰۳۰۴۱۱۶۱۷</a></li>
-            <li class="footer-link-item"><a href="tel:09351794610"><i data-lucide="phone"></i> دپارتمان IT: ۰۹۳۵۱۷۹۴۶۱۰</a></li>
+            <li class="footer-link-item"><a href="https://nshn.ir/1e_bveNRex4Fh9" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> شعبه ۱: مرتضوی بین کارون و جیحون (منطقه ۱۰)</a></li>
+            <li class="footer-link-item"><a href="https://nshn.ir/10_bvgh0yxOc3E" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> شعبه ۲: اسکندری جنوبی بین یکم و شکوفه (منطقه ۱۱)</a></li>
+            <li class="footer-link-item"><a href="https://wa.me/989030411617" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> پشتیبانی واتساپ و بله: ۰۹۰۳۰۴۱۱۶۱۷</a></li>
+            <li class="footer-link-item"><a href="tel:09351794610"><i class="fa-solid fa-headset"></i> دپارتمان IT: ۰۹۳۵۱۷۹۴۶۱۰</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>کلیه حقوق برای آموزشگاه فنی و حرفه‌ای ماهریار محفوظ است © ۱۴۰۳ - ۱۴۰۵</p>
-        <p><a href="./index.html" style="color:var(--color-secondary);">بازگشت به صفحه اصلی آموزشگاه</a></p>
+        <p>آموزشگاه فنی و حرفه‌ای آزاد ماهریار (تأسیس ۱۴۰۱) با مجوز رسمی سازمان آموزش فنی و حرفه‌ای کشور | کلیه حقوق محفوظ است © ۱۴۰۱ - ۱۴۰۵</p>
       </div>
     </div>
   </footer>
 
   <!-- Fast Call Floating Action Button -->
-  <a href="tel:09030411617" class="fab-call-btn" title="تماس سریع و مشاوره با ماهریار" aria-label="تماس با کارشناس آموزشگاه">
-    <i data-lucide="phone-call" style="width:24px;height:24px;"></i>
+  <a href="https://wa.me/989030411617" target="_blank" rel="noopener noreferrer" class="fab-call-btn" title="پشتیبانی واتساپ ماهریار" aria-label="پشتیبانی واتساپ">
+    <i class="fa-brands fa-whatsapp" style="font-size:1.6rem;"></i>
   </a>
 
   <!-- Consultation Modal (<dialog>) -->
@@ -862,12 +678,12 @@
     <div class="modal-header">
       <h3 id="modalTitle">پیش‌ثبت‌نام و مشاوره دوره ICDL</h3>
       <button type="button" class="btn-icon modal-close-btn" id="btnCloseConsultation" aria-label="بستن فرم">
-        <i data-lucide="x" style="width:20px;height:20px;"></i>
+        <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
     <div class="modal-body">
       <p style="font-size:0.88rem;color:var(--color-text-muted);margin-bottom:1.25rem;">
-        برای راهنمایی زمان‌بندی کدهای جدید، نحوه تقسیط شهریه و رزرو صندلی، اطلاعات خود را ثبت فرمایید:
+        برای راهنمایی زمان‌بندی کدهای جدید، نحوه تقسیط شهریه و شیوه برگزاری (حضوری یا آنلاین)، اطلاعات خود را ثبت فرمایید:
       </p>
 
       <form id="modalConsultationForm">
@@ -882,16 +698,16 @@
         </div>
 
         <div class="form-group">
-          <label for="modalCourseSelect" class="form-label">دوره انتخابی:</label>
+          <label for="modalCourseSelect" class="form-label">کد انتخابی:</label>
           <select id="modalCourseSelect" name="course" class="form-control">
-            <option value="icdl_a">ICDL - کد A عصر (شعبه ۱ مرتضوی)</option>
-            <option value="icdl_b">ICDL - کد B صبح (شعبه ۲ اسکندری)</option>
-            <option value="icdl_c">ICDL - کد C آخر هفته شاغلین (شعبه ۱)</option>
+            <option value="icdl_a">حضوری - کد A عصر (شعبه ۱ مرتضوی)</option>
+            <option value="icdl_b">حضوری - کد B صبح (شعبه ۲ اسکندری)</option>
+            <option value="icdl_c">مجازی و آنلاین تعاملی از سراسر کشور</option>
           </select>
         </div>
 
         <button type="submit" class="btn btn-primary" style="width:100%;margin-top:0.75rem;">
-          <i data-lucide="check-circle" style="width:18px;height:18px;"></i>
+          <i class="fa-solid fa-circle-check"></i>
           <span>تایید و رزرو مشاوره</span>
         </button>
 
@@ -902,7 +718,8 @@
 
   <!-- Local Scripts -->
   <script src="assets/vendor/js/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/js/lucide.min.js"></script>
+  <script src="assets/vendor/js/sweetalert2.all.min.js"></script>
+  <script src="assets/vendor/js/toastify.min.js"></script>
   <script src="assets/js/app.js"></script>
 
 </body>

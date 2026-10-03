@@ -26,7 +26,11 @@
   },
   "homepage": "https://github.com/roseshayan/maheryar_academy#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.3.1",
+    "bootstrap-icons": "^1.13.1",
     "lucide": "^1.16.0",
-    "swiper": "^12.1.2"
+    "sweetalert2": "^11.26.25",
+    "swiper": "^12.1.2",
+    "toastify-js": "^1.12.0"
   }
 }

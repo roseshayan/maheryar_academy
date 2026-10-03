@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaqAccordion();
   initCurriculumAccordion();
   initCourseTabs();
+  initFestivalCountdown();
+  initVideoModal();
   initConsultationModal();
   initPwaSupport();
 });
@@ -263,24 +265,66 @@ function initConsultationModal() {
       const feedback = form.querySelector('.form-feedback');
 
       if (!phoneInput || !phoneInput.value.trim()) {
-        alert('لطفاً شماره تماس خود را وارد نمایید.');
+        if (typeof Swal !== 'undefined') {
+          Swal.fire({
+            icon: 'warning',
+            title: 'شماره تماس الزامی است',
+            text: 'لطفاً شماره تلفن همراه خود را جهت برقراری تماس وارد نمایید.',
+            confirmButtonText: 'تایید',
+            confirmButtonColor: '#554596'
+          });
+        } else {
+          alert('لطفاً شماره تماس خود را وارد نمایید.');
+        }
         return;
       }
 
-      // Show success feedback
+      const userName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : 'کارآموز گرامی';
+
+      // SweetAlert2 notification
+      if (typeof Swal !== 'undefined') {
+        Swal.fire({
+          icon: 'success',
+          title: 'درخواست مشاوره ثبت شد!',
+          text: `با تشکر از شما ${userName} عزیز! کارشناسان آموزشگاه ماهریار به زودی با شما تماس خواهند گرفت.`,
+          confirmButtonText: 'سپاس، متوجه شدم',
+          confirmButtonColor: '#554596',
+          timer: 4500,
+          timerProgressBar: true
+        });
+      }
+
+      // Toastify notification
+      if (typeof Toastify !== 'undefined') {
+        Toastify({
+          text: `درخواست مشاوره برای ${userName} ثبت گردید`,
+          duration: 4000,
+          gravity: 'top',
+          position: 'left',
+          style: {
+            background: 'linear-gradient(135deg, #10b981, #059669)',
+            borderRadius: '12px',
+            fontFamily: 'IRANSansX',
+            fontSize: '0.9rem',
+            boxShadow: '0 8px 24px rgba(16, 185, 129, 0.35)'
+          }
+        }).showToast();
+      }
+
+      // In-page fallback feedback
       if (feedback) {
-        feedback.textContent = `با تشکر از شما ${nameInput ? nameInput.value : ''}! درخواست مشاوره شما با موفقیت ثبت گردید. کارشناسان ماهریار ظرف چند ساعت کاری آینده با شما تماس خواهند گرفت.`;
+        feedback.textContent = `با تشکر از شما ${userName}! درخواست مشاوره شما با موفقیت ثبت گردید.`;
         feedback.className = 'form-feedback success';
       }
 
       form.reset();
 
-      // If in dialog, close after 2.5s
+      // If in dialog, close dialog
       if (dialog && form.id === 'modalConsultationForm') {
         setTimeout(() => {
           dialog.close();
           if (feedback) feedback.className = 'form-feedback';
-        }, 3000);
+        }, 1200);
       }
     });
   });
@@ -401,4 +445,91 @@ function initCourseTabs() {
 
   window.addEventListener('scroll', handleScroll, { passive: true });
 }
+
+/**
+ * Festival Countdown Timer
+ */
+function initFestivalCountdown() {
+  const daysEl = document.getElementById('countDays');
+  const hoursEl = document.getElementById('countHours');
+  const minutesEl = document.getElementById('countMinutes');
+  const secondsEl = document.getElementById('countSeconds');
+
+  if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+  // Set target date (e.g., 6 days from now)
+  let targetDate = new Date();
+  targetDate.setDate(targetDate.getDate() + 6);
+  targetDate.setHours(23, 59, 59, 0);
+
+  const updateCountdown = () => {
+    const now = new Date().getTime();
+    const distance = targetDate.getTime() - now;
+
+    if (distance < 0) {
+      daysEl.textContent = '۰۰';
+      hoursEl.textContent = '۰۰';
+      minutesEl.textContent = '۰۰';
+      secondsEl.textContent = '۰۰';
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    const pad = (n) => String(n).padStart(2, '0');
+
+    daysEl.textContent = pad(days);
+    hoursEl.textContent = pad(hours);
+    minutesEl.textContent = pad(minutes);
+    secondsEl.textContent = pad(seconds);
+  };
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+}
+
+/**
+ * Video Modal / Player
+ */
+function initVideoModal() {
+  const playBtns = document.querySelectorAll('.btn-play-video, .video-poster-wrapper, .video-story-thumb');
+  if (!playBtns.length) return;
+
+  playBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const videoTitle = btn.getAttribute('data-video-title') || 'معرفی کارگاه‌ها و آموزشگاه فنی و حرفه‌ای ماهریار';
+
+      if (typeof Swal !== 'undefined') {
+        Swal.fire({
+          title: videoTitle,
+          html: `
+            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-top:10px;">
+              <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg, #1e1b38, #3c306d);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:20px;text-align:center;">
+                <i class="fa-solid fa-play-circle" style="font-size:3.5rem;color:#fbbf24;margin-bottom:12px;"></i>
+                <h4 style="font-size:1.1rem;font-weight:800;margin-bottom:6px;">آموزشگاه فنی و حرفه‌ای آزاد ماهریار (تأسیس ۱۴۰۱)</h4>
+                <p style="font-size:0.85rem;color:#cfcce3;">ویدئوی تور مجازی کارگاه‌های مجهز شعب ۱ و ۲ تهران و مصاحبه با مربیان رسمی</p>
+                <div style="margin-top:15px;display:flex;gap:10px;">
+                  <span class="badge badge-primary">شعبه مرتضوی (منطقه ۱۰)</span>
+                  <span class="badge badge-secondary">شعبه اسکندری (منطقه ۱۱)</span>
+                </div>
+              </div>
+            </div>
+          `,
+          width: '720px',
+          showCloseButton: true,
+          showConfirmButton: false,
+          background: '#ffffff',
+          customClass: {
+            popup: 'video-swal-modal'
+          }
+        });
+      }
+    });
+  });
+}
+
 

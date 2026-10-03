@@ -3434,6 +3434,24 @@ textarea:focus-visible {
     display: block;
     position: sticky;
     top: 5.5rem;
+    max-height: calc(100vh - 6.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-left: 6px;
+  }
+
+  .catalog-sidebar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .catalog-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .catalog-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(85, 69, 150, 0.2);
+    border-radius: 4px;
+  }
+  .catalog-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
   }
 }
 

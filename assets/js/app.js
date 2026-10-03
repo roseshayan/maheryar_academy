@@ -793,6 +793,15 @@ function initCatalogFilters() {
 }
 
 /**
+ * Persian number digits converter helper
+ */
+function toPersianDigits(num) {
+  if (num === null || num === undefined) return '';
+  const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+  return num.toString().replace(/[0-9]/g, (d) => farsiDigits[d]);
+}
+
+/**
  * ==========================================================================
  * Instructors Catalog Filter & Search (instructors.html)
  * ==========================================================================

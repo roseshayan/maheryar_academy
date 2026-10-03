@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCourseTabs();
   initFestivalCountdown();
   initVideoModal();
+  initCatalogFilters();
   initConsultationModal();
   initPwaSupport();
 });
@@ -531,5 +532,263 @@ function initVideoModal() {
     });
   });
 }
+
+/**
+ * Course Catalog & Store-Style Filtering
+ */
+function initCatalogFilters() {
+  const catalogGrid = document.getElementById('catalogCoursesGrid');
+  if (!catalogGrid) return;
+
+  const courseCards = Array.from(catalogGrid.querySelectorAll('.catalog-course-item'));
+  const searchInput = document.getElementById('catalogSearchInput');
+  const sortSelect = document.getElementById('catalogSortSelect');
+  const emptyState = document.getElementById('catalogEmptyState');
+  const counterEl = document.getElementById('catalogTotalCount');
+  const activeFiltersContainer = document.getElementById('activeFiltersPills');
+  const resetBtns = document.querySelectorAll('.btn-reset-filters');
+  const btnEmptyReset = document.getElementById('btnEmptyReset');
+
+  // View switchers (Grid vs List)
+  const btnGridView = document.getElementById('btnGridView');
+  const btnListView = document.getElementById('btnListView');
+
+  if (btnGridView && btnListView) {
+    btnGridView.addEventListener('click', () => {
+      btnGridView.classList.add('active');
+      btnListView.classList.remove('active');
+      catalogGrid.classList.remove('list-view');
+    });
+
+    btnListView.addEventListener('click', () => {
+      btnListView.classList.add('active');
+      btnGridView.classList.remove('active');
+      catalogGrid.classList.add('list-view');
+    });
+  }
+
+  // Mobile Filter Drawer
+  const btnOpenMobileFilters = document.getElementById('btnOpenMobileFilters');
+  const btnCloseMobileFilters = document.getElementById('btnCloseMobileFilters');
+  const mobileFilterDrawer = document.getElementById('mobileFilterDrawer');
+  const mobileFilterOverlay = document.getElementById('mobileFilterOverlay');
+  const btnApplyMobileFilters = document.getElementById('btnApplyMobileFilters');
+
+  const openMobileFilter = () => {
+    if (mobileFilterDrawer && mobileFilterOverlay) {
+      mobileFilterDrawer.classList.add('active');
+      mobileFilterOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const closeMobileFilter = () => {
+    if (mobileFilterDrawer && mobileFilterOverlay) {
+      mobileFilterDrawer.classList.remove('active');
+      mobileFilterOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  };
+
+  if (btnOpenMobileFilters) btnOpenMobileFilters.addEventListener('click', openMobileFilter);
+  if (btnCloseMobileFilters) btnCloseMobileFilters.addEventListener('click', closeMobileFilter);
+  if (mobileFilterOverlay) mobileFilterOverlay.addEventListener('click', closeMobileFilter);
+  if (btnApplyMobileFilters) btnApplyMobileFilters.addEventListener('click', closeMobileFilter);
+
+  // Main Filter Handler
+  const applyFilters = () => {
+    // 1. Get search query
+    const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+    // 2. Get selected categories
+    const selectedCats = Array.from(document.querySelectorAll('input[name="categoryFilter"]:checked')).map(cb => cb.value);
+
+    // 3. Get selected learning mode
+    const selectedMode = document.querySelector('input[name="modeFilter"]:checked')?.value || 'all';
+
+    // 4. Get selected branch
+    const selectedBranch = document.querySelector('input[name="branchFilter"]:checked')?.value || 'all';
+
+    // 5. Toggles
+    const installmentOnly = document.getElementById('filterInstallmentOnly')?.checked || false;
+    const certOnly = document.getElementById('filterCertOnly')?.checked || false;
+
+    let visibleCount = 0;
+
+    courseCards.forEach(card => {
+      const title = card.getAttribute('data-title')?.toLowerCase() || '';
+      const cat = card.getAttribute('data-category') || '';
+      const mode = card.getAttribute('data-mode') || ''; // 'onsite', 'online', 'both'
+      const branch = card.getAttribute('data-branch') || ''; // 'branch1', 'branch2', 'both'
+      const hasInstallment = card.getAttribute('data-installment') === 'true';
+      const hasCert = card.getAttribute('data-cert') === 'true';
+
+      // Matching conditions
+      const matchQuery = !query || title.includes(query);
+      const matchCat = !selectedCats.length || selectedCats.includes('all') || selectedCats.includes(cat);
+      const matchMode = selectedMode === 'all' || mode === selectedMode || mode === 'both';
+      const matchBranch = selectedBranch === 'all' || branch === selectedBranch || branch === 'both';
+      const matchInstallment = !installmentOnly || hasInstallment;
+      const matchCert = !certOnly || hasCert;
+
+      if (matchQuery && matchCat && matchMode && matchBranch && matchInstallment && matchCert) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Sort visible cards
+    sortCards();
+
+    // Update Counter
+    if (counterEl) {
+      counterEl.textContent = `${visibleCount} دوره آموزشی`;
+    }
+
+    // Toggle Empty State
+    if (emptyState) {
+      if (visibleCount === 0) {
+        emptyState.style.display = 'flex';
+      } else {
+        emptyState.style.display = 'none';
+      }
+    }
+
+    // Render active filter pills
+    renderActiveFilterPills(selectedCats, selectedMode, selectedBranch, installmentOnly, certOnly, query);
+  };
+
+  // Sort Handler
+  const sortCards = () => {
+    const sortBy = sortSelect ? sortSelect.value : 'default';
+    const sorted = [...courseCards].sort((a, b) => {
+      if (sortBy === 'hours-desc') {
+        return (parseInt(b.getAttribute('data-hours')) || 0) - (parseInt(a.getAttribute('data-hours')) || 0);
+      }
+      if (sortBy === 'hours-asc') {
+        return (parseInt(a.getAttribute('data-hours')) || 0) - (parseInt(b.getAttribute('data-hours')) || 0);
+      }
+      if (sortBy === 'rating') {
+        return (parseFloat(b.getAttribute('data-rating')) || 0) - (parseFloat(a.getAttribute('data-rating')) || 0);
+      }
+      if (sortBy === 'popular') {
+        return (parseInt(b.getAttribute('data-students')) || 0) - (parseInt(a.getAttribute('data-students')) || 0);
+      }
+      return 0;
+    });
+
+    sorted.forEach(card => catalogGrid.appendChild(card));
+  };
+
+  // Render Active Pills
+  const renderActiveFilterPills = (cats, mode, branch, installment, cert, query) => {
+    if (!activeFiltersContainer) return;
+    activeFiltersContainer.innerHTML = '';
+
+    if (query) {
+      addPill(`جستجو: "${query}"`, () => {
+        if (searchInput) searchInput.value = '';
+        applyFilters();
+      });
+    }
+
+    cats.forEach(c => {
+      if (c !== 'all') {
+        const label = document.querySelector(`input[name="categoryFilter"][value="${c}"]`)?.closest('.filter-check-item')?.querySelector('.filter-text')?.textContent || c;
+        addPill(label, () => {
+          const cb = document.querySelector(`input[name="categoryFilter"][value="${c}"]`);
+          if (cb) cb.checked = false;
+          applyFilters();
+        });
+      }
+    });
+
+    if (mode !== 'all') {
+      const modeLabel = mode === 'onsite' ? 'حضوری در شعب' : 'مجازی / آنلاین';
+      addPill(modeLabel, () => {
+        const radio = document.querySelector('input[name="modeFilter"][value="all"]');
+        if (radio) radio.checked = true;
+        applyFilters();
+      });
+    }
+
+    if (branch !== 'all') {
+      const branchLabel = branch === 'branch1' ? 'شعبه ۱ (مرتضوی)' : 'شعبه ۲ (اسکندری)';
+      addPill(branchLabel, () => {
+        const radio = document.querySelector('input[name="branchFilter"][value="all"]');
+        if (radio) radio.checked = true;
+        applyFilters();
+      });
+    }
+
+    if (installment) {
+      addPill('پرداخت اقساطی', () => {
+        const toggle = document.getElementById('filterInstallmentOnly');
+        if (toggle) toggle.checked = false;
+        applyFilters();
+      });
+    }
+
+    if (cert) {
+      addPill('مدرک بین‌المللی ISCO', () => {
+        const toggle = document.getElementById('filterCertOnly');
+        if (toggle) toggle.checked = false;
+        applyFilters();
+      });
+    }
+  };
+
+  const addPill = (text, onRemove) => {
+    const pill = document.createElement('span');
+    pill.className = 'active-filter-pill';
+    pill.innerHTML = `<span>${text}</span> <button type="button" aria-label="حذف"><i class="fa-solid fa-xmark"></i></button>`;
+    pill.querySelector('button').addEventListener('click', onRemove);
+    activeFiltersContainer.appendChild(pill);
+  };
+
+  // Reset Filters
+  const resetAll = () => {
+    if (searchInput) searchInput.value = '';
+    document.querySelectorAll('input[name="categoryFilter"]').forEach(cb => cb.checked = false);
+    const catAll = document.querySelector('input[name="categoryFilter"][value="all"]');
+    if (catAll) catAll.checked = true;
+
+    const modeAll = document.querySelector('input[name="modeFilter"][value="all"]');
+    if (modeAll) modeAll.checked = true;
+
+    const branchAll = document.querySelector('input[name="branchFilter"][value="all"]');
+    if (branchAll) branchAll.checked = true;
+
+    const toggleInstallment = document.getElementById('filterInstallmentOnly');
+    if (toggleInstallment) toggleInstallment.checked = false;
+
+    const toggleCert = document.getElementById('filterCertOnly');
+    if (toggleCert) toggleCert.checked = false;
+
+    if (sortSelect) sortSelect.value = 'default';
+
+    applyFilters();
+  };
+
+  resetBtns.forEach(btn => btn.addEventListener('click', resetAll));
+  if (btnEmptyReset) btnEmptyReset.addEventListener('click', resetAll);
+
+  // Event Listeners
+  if (searchInput) searchInput.addEventListener('input', applyFilters);
+  document.querySelectorAll('input[name="categoryFilter"], input[name="modeFilter"], input[name="branchFilter"]').forEach(input => {
+    input.addEventListener('change', applyFilters);
+  });
+  const toggleInstallment = document.getElementById('filterInstallmentOnly');
+  const toggleCert = document.getElementById('filterCertOnly');
+  if (toggleInstallment) toggleInstallment.addEventListener('change', applyFilters);
+  if (toggleCert) toggleCert.addEventListener('change', applyFilters);
+  if (sortSelect) sortSelect.addEventListener('change', applyFilters);
+
+  // Initial Run
+  applyFilters();
+}
+
 
 

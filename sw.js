@@ -1,8 +1,11 @@
-const CACHE_NAME = 'maheryar-cache-v2';
+const CACHE_NAME = 'maheryar-cache-v3';
 const PRECACHE_ASSETS = [
   './',
   './index.html',
+  './courses.html',
   './course-single.html',
+  './instructors.html',
+  './instructor-single.html',
   './manifest.json',
   './assets/css/fontiran.css',
   './assets/css/style.css',
@@ -22,7 +25,14 @@ const PRECACHE_ASSETS = [
   './assets/img/Logo-Icon.svg',
   './assets/img/logo-irantvto.png',
   './assets/img/logo-neshan.png',
-  './assets/img/logo-bale.png'
+  './assets/img/logo-bale.png',
+  './assets/img/instructors/shayanfar.jpg',
+  './assets/img/instructors/kazemi.jpg',
+  './assets/img/instructors/kamali.jpg',
+  './assets/img/instructors/rezvani.jpg',
+  './assets/img/instructors/moradi.jpg',
+  './assets/img/instructors/rezazadeh.jpg',
+  './assets/img/instructors/salehi.jpg'
 ];
 
 self.addEventListener('install', (event) => {

@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initFestivalCountdown();
   initVideoModal();
   initCatalogFilters();
+  initInstructorsCatalog();
+  initInstructorSingleProfile();
   initConsultationModal();
   initPwaSupport();
 });
@@ -789,6 +791,599 @@ function initCatalogFilters() {
   // Initial Run
   applyFilters();
 }
+
+/**
+ * ==========================================================================
+ * Instructors Catalog Filter & Search (instructors.html)
+ * ==========================================================================
+ */
+function initInstructorsCatalog() {
+  const cards = document.querySelectorAll('.instructor-pro-card');
+  if (!cards.length) return;
+
+  const deptPills = document.querySelectorAll('.dept-pill-btn');
+  const searchInput = document.getElementById('instructorSearchInput');
+  const campusFilter = document.getElementById('instructorCampusFilter');
+  const visibleCountBadge = document.getElementById('instructorVisibleCount');
+  const emptyState = document.getElementById('noInstructorsFound');
+
+  let activeDept = 'all';
+
+  const filterCards = () => {
+    const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+    const selectedCampus = campusFilter ? campusFilter.value : 'all';
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const cardDept = card.getAttribute('data-dept') || '';
+      const cardCampuses = card.getAttribute('data-campuses') || '';
+      const cardText = card.textContent.toLowerCase();
+
+      const matchDept = (activeDept === 'all' || cardDept === activeDept);
+      const matchCampus = (selectedCampus === 'all' || cardCampuses.includes(selectedCampus));
+      const matchQuery = (!query || cardText.includes(query));
+
+      if (matchDept && matchCampus && matchQuery) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (visibleCountBadge) {
+      visibleCountBadge.textContent = `نمایش ${toPersianDigits(visibleCount)} مربی رسمی`;
+    }
+
+    if (emptyState) {
+      emptyState.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+  };
+
+  deptPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      deptPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeDept = pill.getAttribute('data-dept') || 'all';
+      filterCards();
+    });
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filterCards);
+  }
+
+  if (campusFilter) {
+    campusFilter.addEventListener('change', filterCards);
+  }
+
+  // Initial calculation
+  filterCards();
+}
+
+/**
+ * ==========================================================================
+ * Single Instructor Profile Logic & Dynamic Data Loader (instructor-single.html)
+ * ==========================================================================
+ */
+const INSTRUCTORS_DATA = {
+  shayanfar: {
+    id: 'shayanfar',
+    name: 'مهندس روزبه شایان‌فر',
+    title: 'مدیر دپارتمان فناوری اطلاعات و مدرس ارشد هوش مصنوعی و برنامه‌نویسی',
+    academic: 'کارشناس ارشد مهندسی نرم‌افزار',
+    license: 'کد مربیگری رسمی فنی‌حرفه‌ای: ۹۸/۴۱/۲۳۱۷',
+    image: 'assets/img/instructors/shayanfar.jpg',
+    dept: 'فناوری اطلاعات و هوش مصنوعی',
+    deptKey: 'it',
+    phone: '09351794610',
+    phoneDisplay: '۰۹۳۵۱۷۹۴۶۱۰ (دپارتمان IT)',
+    expYears: '۱۲+ سال',
+    students: '۱,۸۵۰+',
+    satisfaction: '۴.۹۵',
+    passingRate: '۹۹.۲٪',
+    bio: [
+      'مهندس روزبه شایان‌فر دارای بیش از ۱۲ سال سابقه تدریس تخصصی در حوزه‌های برنامه‌نویسی پایتون، مهارت‌های هفتگانه ICDL، پایگاه‌داده و توسعه نرم‌افزار است. ایشان با کسب کارت رسمی مربیگری از سازمان آموزش فنی و حرفه‌ای کشور و گواهینامه بین‌المللی فنون تدریس (پداگوژی)، صدها کارآموز را آماده ورود مستقیم به بازار کار داخلی و بین‌المللی نموده‌اند.',
+      'رویکرد آموزشی ایشان مبتنی بر پروژه‌محوری، حل چالش‌های روز دنیای تکنولوژی و یادگیری عمیق مفاهیم بنیادین است. کلاس‌های ایشان هم به صورت حضوری در کارگاه‌های مجهز شعب ۱ و ۲ ماهریار و هم به صورت تعاملی آنلاین با پشتیبانی کدنویسی زنده برگزار می‌گردد.'
+    ],
+    education: [
+      { year: '۱۳۹۵', title: 'کارشناسی ارشد مهندسی کامپیوتر - گرایش نرم‌افزار', desc: 'دانشگاه دولتی با تمرکز بر سیستم‌های هوشمند و تحلیل داده‌ها' },
+      { year: '۱۳۹۱', title: 'کارشناسی مهندسی فناوری اطلاعات (IT)', desc: 'فارغ‌التحصیل ممتاز با رتبه برتر دانشگاهی' }
+    ],
+    certs: [
+      { title: 'کارت مربیگری رسمی سازمان آموزش فنی و حرفه‌ای', desc: 'تایید صلاحیت علمی و عملی در خوشه فناوری اطلاعات' },
+      { title: 'گواهینامه بین‌المللی پداگوژی عمومی (روش‌ها و فنون تدریس)', desc: 'استاندارد بین‌المللی آموزش مهارت‌محور بزرگسالان' },
+      { title: 'مدرک تخصصی توسعه پایتون و هوش مصنوعی', desc: 'دارای سرتیفیکیت معتبر پیاده‌سازی مدل‌های یادگیری ماشین' }
+    ],
+    courses: [
+      {
+        title: 'مهارت‌های هفتگانه رایانه (ICDL جامع بین‌المللی)',
+        hours: '۱۳۰ ساعت کارگاهی',
+        campus: 'شعبه ۱ مرتضوی + آنلاین',
+        fee: '۴,۸۰۰,۰۰۰ تومان',
+        installment: 'امکان پرداخت در ۳ قسط',
+        link: 'course-single.html'
+      },
+      {
+        title: 'برنامه‌نویسی پایتون (Python) از پایه تا هوش مصنوعی',
+        hours: '۱۱۰ ساعت پروژه محور',
+        campus: 'شعبه ۲ اسکندری + آنلاین',
+        fee: '۶,۵۰۰,۰۰۰ تومان',
+        installment: 'پرداخت در ۴ قسط بدون کارمزد',
+        link: 'course-single.html'
+      },
+      {
+        title: 'طراحی وب کاربردی و سئو مدرن با HTML5, CSS3 و JS',
+        hours: '۹۰ ساعت عملی',
+        campus: 'کلاس مجازی تعاملی کشوری',
+        fee: '۵,۲۰۰,۰۰۰ تومان',
+        installment: 'پرداخت اقساطی ماهانه',
+        link: 'course-single.html'
+      }
+    ],
+    schedule: [
+      { day: 'شنبه و چهارشنبه', hours: '۱۶:۰۰ الی ۲۰:۰۰', location: 'شعبه ۱: مرتضوی (سایت ۱ کامپیوتر)', type: 'کلاس‌های حضوری ICDL و پایتون' },
+      { day: 'یکشنبه و سه‌شنبه', hours: '۱۶:۰۰ الی ۲۰:۰۰', location: 'شعبه ۲: اسکندری (سایت تخصصی نرم‌افزار)', type: 'کلاس‌های حضوری هوش مصنوعی و وب' },
+      { day: 'پنج‌شنبه‌ها', hours: '۰۹:۰۰ الی ۱۳:۰۰', location: 'استودیو مجازی ماهریار', type: 'کلاس‌های تعاملی آنلاین کشوری' }
+    ]
+  },
+  kazemi: {
+    id: 'kazemi',
+    name: 'استاد مریم کاظمی',
+    title: 'سرپرست دپارتمان صنایع پوشاک و طراحی دوخت آموزشگاه ماهریار',
+    academic: 'کارشناس ارشد طراحی پارچه و لباس',
+    license: 'کد مربیگری رسمی فنی‌حرفه‌ای: ۹۷/۱۵/۴۱۸۲',
+    image: 'assets/img/instructors/kazemi.jpg',
+    dept: 'صنایع پوشاک و طراحی دوخت',
+    deptKey: 'fashion',
+    phone: '09030411617',
+    phoneDisplay: '۰۹۰۳۰۴۱۱۶۱۷ (دفتر آموزشگاه)',
+    expYears: '۱۵+ سال',
+    students: '۲,۱۰۰+',
+    satisfaction: '۴.۹۸',
+    passingRate: '۱۰۰٪',
+    bio: [
+      'استاد مریم کاظمی از پیشکسوتان و نخبگان طراحی دوخت و صنایع پوشاک کشور، دارنده مدال طلای المپیاد ملی مهارت و عضو کارگروه تدوین استانداردهای سازمان فنی و حرفه‌ای هستند. ایشان بیش از ۱۵ سال به آموزش تخصصی الگو، برش، دوخت‌های پیشرفته و راه‌اندازی مزون‌های صنعتی پرداخته‌اند.',
+      'کارآموزان استاد کاظمی بالاترین نرخ قبولی در آزمون‌های بین‌المللی و جذب در بازار کار طراحی لباس و تولید پوشاک را ثبت کرده‌اند.'
+    ],
+    education: [
+      { year: '۱۳۹۲', title: 'کارشناسی ارشد طراحی پارچه و لباس', desc: 'دانشگاه هنر تهران با پایان‌نامه برگزیده در مد پایدار' },
+      { year: '۱۳۸۸', title: 'کارشناسی تکنولوژی طراحی دوخت و پوشاک', desc: 'فارغ‌التحصیل رتبه اول دانشگاه' }
+    ],
+    certs: [
+      { title: 'کارت مربیگری رسمی صنایع پوشاک سازمان آموزش فنی و حرفه‌ای', desc: 'سطح پیشرفته استانداردهای مولر و متریک' },
+      { title: 'مدال طلای المپیاد ملی مهارت در رشته فناوری مد و خیاطی', desc: 'کسب عنوان مربی برگزیده استانی و کشوری' },
+      { title: 'گواهینامه بین‌المللی طراحی لباس شب و عروس از آکادمی اروپایی', desc: 'تخصص در تکنیک‌های گن‌دوزی و باکس‌دوزی پیشرفته' }
+    ],
+    courses: [
+      {
+        title: 'خیاطی نازک‌دوزی زنانه (متد مولر آلمان با مدرک بین‌المللی)',
+        hours: '۲۸۰ ساعت جامع کارگاهی',
+        campus: 'شعبه ۱ مرتضوی و شعبه ۲ اسکندری',
+        fee: '۷,۹۰۰,۰۰۰ تومان',
+        installment: 'پرداخت در ۴ قسط منعطف',
+        link: 'course-single.html'
+      },
+      {
+        title: 'دوره تخصصی الگو و دوخت لباس شب، عروس و باکس‌دوزی',
+        hours: '۱۴۰ ساعت پیشرفته',
+        campus: 'کارگاه مجهز شعبه ۲ اسکندری',
+        fee: '۸,۵۰۰,۰۰۰ تومان',
+        installment: 'پرداخت اقساطی بدون بهره',
+        link: 'course-single.html'
+      }
+    ],
+    schedule: [
+      { day: 'شنبه و دوشنبه', hours: '۰۹:۰۰ الی ۱۳:۰۰', location: 'شعبه ۱: مرتضوی (کارگاه مجهز دوخت)', type: 'دوره جامع نازک‌دوزی زنانه' },
+      { day: 'یکشنبه و سه‌شنبه', hours: '۰۹:۰۰ الی ۱۳:۰۰', location: 'شعبه ۲: اسکندری (کارگاه تخصصی مزون)', type: 'دوره لباس شب و مجلسی' },
+      { day: 'چهارشنبه‌ها', hours: '۱۴:۰۰ الی ۱۸:۰۰', location: 'کارگاه‌های تک‌جلسه‌ای الگو', type: 'ورکشاپ‌های رفع اشکال و مزون‌داری' }
+    ]
+  },
+  kamali: {
+    id: 'kamali',
+    name: 'استاد حمیدرضا کمالی',
+    title: 'مدیر دپارتمان امور مالی، بازرگانی و حسابداری آموزشگاه ماهریار',
+    academic: 'کارشناس ارشد حسابداری و مدیریت مالی',
+    license: 'کد مربیگری رسمی فنی‌حرفه‌ای: ۹۹/۶۳/۱۰۴۴',
+    image: 'assets/img/instructors/kamali.jpg',
+    dept: 'امور مالی و بازرگانی',
+    deptKey: 'finance',
+    phone: '09030411617',
+    phoneDisplay: '۰۹۰۳۰۴۱۱۶۱۷ (دفتر آموزشگاه)',
+    expYears: '۱۱+ سال',
+    students: '۱,۴۰۰+',
+    satisfaction: '۴.۹۲',
+    passingRate: '۹۸.۸٪',
+    bio: [
+      'استاد حمیدرضا کمالی، حسابدار رسمی، مدیر مالی شرکت‌های تولیدی و بازرگانی معتبر و مشاور مالیاتی سازمان‌ها می‌باشند. ایشان با تسلط کامل بر قوانین کار و تامین اجتماعی، سامانه مودیان و نرم‌افزارهای یکپارچه مالی (سپیدار، هلو و اکسل مالیاتی)، دانش و فنون عملی را به کارآموزان منتقل می‌نمایند.'
+    ],
+    education: [
+      { year: '۱۳۹۴', title: 'کارشناسی ارشد حسابداری و مدیریت مالی', desc: 'دانشگاه شهید بهشتی با پژوهش در حوزه مدیریت هزینه' },
+      { year: '۱۳۹۰', title: 'کارشناسی حسابداری مالی', desc: 'دانشگاه تهران' }
+    ],
+    certs: [
+      { title: 'کارت مربیگری رسمی امور مالی و بازرگانی سازمان فنی و حرفه‌ای', desc: 'تدریس استانداردهای حسابداری عمومی و پیشرفته' },
+      { title: 'مدرک رسمی مدرسی و کاربری پیشرفته نرم‌افزار همکاران سیستم و سپیدار', desc: 'مدرس تایید صلاحیت شده سیستم‌های مالی' },
+      { title: 'گواهی صلاحیت مشاوره مالیاتی و سامانه مودیان مالیاتی', desc: 'تخصص در تنظیم اظهارنامه‌های فصلی و ارزش افزوده' }
+    ],
+    courses: [
+      {
+        title: 'حسابداری ویژه بازار کار + نرم‌افزار سپیدار سیستم و اکسل مالیاتی',
+        hours: '۱۲۰ ساعت کارگاهی',
+        campus: 'شعبه ۱ مرتضوی + آنلاین',
+        fee: '۵,۴۰۰,۰۰۰ تومان',
+        installment: 'پرداخت در ۳ قسط شهریه',
+        link: 'course-single.html'
+      }
+    ],
+    schedule: [
+      { day: 'شنبه و چهارشنبه', hours: '۱۷:۰۰ الی ۲۰:۳۰', location: 'شعبه ۱: مرتضوی (سایت مالی)', type: 'حسابداری بازار کار و سپیدار' },
+      { day: 'پنج‌شنبه‌ها', hours: '۱۴:۰۰ الی ۱۸:۰۰', location: 'آنلاین و تعاملی کشوری', type: 'کارگاه تخصصی سامانه مودیان و مالیات' }
+    ]
+  },
+  rezvani: {
+    id: 'rezvani',
+    name: 'مهندس نیلوفر رضوانی',
+    title: 'مدرس ارشد طراحی گرافیک، UI/UX، فتوشاپ و تدوین ویدیو',
+    academic: 'کارشناس ارشد ارتباط تصویری (گرافیک)',
+    license: 'کد مربیگری رسمی فنی‌حرفه‌ای: ۰۱/۲۴/۵۵۳۹',
+    image: 'assets/img/instructors/rezvani.jpg',
+    dept: 'فناوری اطلاعات و گرافیک',
+    deptKey: 'it',
+    phone: '09351794610',
+    phoneDisplay: '۰۹۳۵۱۷۹۴۶۱۰ (دپارتمان فناوری)',
+    expYears: '۹+ سال',
+    students: '۱,۲۵۰+',
+    satisfaction: '۴.۹۴',
+    passingRate: '۹۹.۰٪',
+    bio: [
+      'مهندس نیلوفر رضوانی، آرت‌دایرکتور و مدرس رسمی دوره‌های تخصصی ادوبی فتوشاپ (Adobe Photoshop)، ایلاستریتور (Illustrator)، پریمیر و فیگما (Figma) می‌باشند. آموزش‌های ایشان به طور مستقیم برای ورود به بازار تبلیغات، شبکه‌های اجتماعی و فریلنسری طراحی شده است.'
+    ],
+    education: [
+      { year: '۱۳۹۷', title: 'کارشناسی ارشد ارتباط تصویری و گرافیک دیجیتال', desc: 'دانشگاه هنر با گرایش هویت بصری برند' },
+      { year: '۱۳۹۳', title: 'کارشناسی گرافیک رایانه‌ای', desc: 'فارغ‌التحصیل ممتاز دانشگاهی' }
+    ],
+    certs: [
+      { title: 'کارت مربیگری رسمی گرافیک رایانه‌ای از سازمان فنی و حرفه‌ای', desc: 'تایید مهارت تدریس نرم‌افزارهای تجسمی ادوبی' },
+      { title: 'مدرک بین‌المللی تدوین دیجیتال و موشن‌گرافیک', desc: 'استاندارد رسمی ادیت ویدیویی و پادکست تصویری' }
+    ],
+    courses: [
+      {
+        title: 'دوره جامع ادوبی فتوشاپ (Adobe Photoshop) ویژه تبلیغات و بازار کار',
+        hours: '۸۰ ساعت فشرده پروژه محور',
+        campus: 'شعبه ۲ اسکندری + آنلاین',
+        fee: '۴,۲۰۰,۰۰۰ تومان',
+        installment: 'پرداخت در ۲ الی ۳ قسط',
+        link: 'course-single.html'
+      }
+    ],
+    schedule: [
+      { day: 'یکشنبه و سه‌شنبه', hours: '۱۶:۰۰ الی ۱۹:۳۰', location: 'شعبه ۲: اسکندری (سایت گرافیک)', type: 'فتوشاپ جامع و طراحی سوشال‌مدیا' },
+      { day: 'جمعه‌ها', hours: '۱۰:۰۰ الی ۱۴:۰۰', location: 'آنلاین استودیو ماهریار', type: 'کلاس‌های ایلاستریتور و رابط کاربری' }
+    ]
+  },
+  moradi: {
+    id: 'moradi',
+    name: 'مهندس علیرضا مرادی',
+    title: 'مدرس ارشد نرم‌افزارهای مهندسی عمران، معماری و مدل‌سازی BIM',
+    academic: 'کارشناس ارشد مهندسی عمران-سازه',
+    license: 'کد مربیگری رسمی فنی‌حرفه‌ای: ۹۶/۸۸/۳۷۲۱',
+    image: 'assets/img/instructors/moradi.jpg',
+    dept: 'نرم‌افزارهای مهندسی عمران و معماری',
+    deptKey: 'engineering',
+    phone: '09030411617',
+    phoneDisplay: '۰۹۰۳۰۴۱۱۶۱۷ (دفتر آموزشگاه)',
+    expYears: '۱۴+ سال',
+    students: '۱,۶۰۰+',
+    satisfaction: '۴.۹۱',
+    passingRate: '۹۸.۵٪',
+    bio: [
+      'مهندس علیرضا مرادی، دارای پروانه اشتغال به کار نظام مهندسی، مجری و طراح پروژه‌های بزرگ ساختمانی و مدرس نرم‌افزارهای اتوکد (AutoCAD 2D/3D)، رویت (Revit BIM)، تری‌دی مکس (3ds Max) و سپ و ایتیبس هستند.'
+    ],
+    education: [
+      { year: '۱۳۹۳', title: 'کارشناسی ارشد مهندسی عمران - سازه', desc: 'دانشگاه صنعتی با پژوهش در شبیه‌سازی عددی سازه‌ها' },
+      { year: '۱۳۸۹', title: 'کارشناسی مهندسی عمران', desc: 'دانشگاه سراسری' }
+    ],
+    certs: [
+      { title: 'کارت مربیگری رسمی نقشه‌کشی و نرم‌افزارهای ساختمانی فنی‌حرفه‌ای', desc: 'دارای مجوز تدریس دوره‌های کد و مدل‌سازی اطلاعات ساختمان' },
+      { title: 'پروانه اشتغال به کار مهندسی پایه یک نظارت و محاسبات', desc: 'سازمان نظام مهندسی ساختمان استان تهران' }
+    ],
+    courses: [
+      {
+        title: 'نقشه‌کشی و مدل‌سازی ساختمانی با اتوکد (AutoCAD 2D & 3D)',
+        hours: '۸۵ ساعت عملی کارگاهی',
+        campus: 'شعبه ۱ مرتضوی + آنلاین',
+        fee: '۴,۶۰۰,۰۰۰ تومان',
+        installment: 'پرداخت در ۳ قسط',
+        link: 'course-single.html'
+      }
+    ],
+    schedule: [
+      { day: 'شنبه و دوشنبه', hours: '۱۷:۰۰ الی ۲۰:۰۰', location: 'شعبه ۱: مرتضوی (سایت مهندسی)', type: 'اتوکد تخصصی و رویت معماری' }
+    ]
+  },
+  rezazadeh: {
+    id: 'rezazadeh',
+    name: 'استاد فاطمه رضازاده',
+    title: 'مدیر دپارتمان صنایع دستی، قالی‌بافی و تابلوفرش سنتی و کامپیوتری',
+    academic: 'استادکار پیشکسوت و کارشناس فرش دستباف',
+    license: 'کد مربیگری رسمی فنی‌حرفه‌ای: ۹۳/۰۹/۱۲۶۰',
+    image: 'assets/img/instructors/rezazadeh.jpg',
+    dept: 'صنایع دستی و بافت',
+    deptKey: 'handicrafts',
+    phone: '09030411617',
+    phoneDisplay: '۰۹۰۳۰۴۱۱۶۱۷ (دفتر آموزشگاه)',
+    expYears: '۱۸+ سال',
+    students: '۲,۷۰۰+',
+    satisfaction: '۴.۹۹',
+    passingRate: '۱۰۰٪',
+    bio: [
+      'استاد فاطمه رضازاده با بیش از ۱۸ سال سابقه درخشان در آموزش صنایع دستی اصیل ایرانی، داور مسابقات ملی مهارت و کارآفرین نمونه در حوزه مشاغل خانگی و خوداشتغالی بانوان هستند. کلاس‌های ایشان همراه با اعطای وام خوداشتغالی و تضمین خرید یا فروش آثار هنرجویان برگزار می‌شود.'
+    ],
+    education: [
+      { year: '۱۳۸۵', title: 'کارشناسی صنایع دستی و گرایش بافت فرش', desc: 'دانشگاه هنر با لوح افتخار در احیای طرح‌های اصیل ایرانی' }
+    ],
+    certs: [
+      { title: 'کارت مربیگری عالی صنایع دستی و قالی‌بافی از سازمان فنی و حرفه‌ای', desc: 'مربی رسمی با بالاترین امتیاز ارزشیابی آموزشی' },
+      { title: 'عنوان کارآفرین نمونه کشوری در توسعه مشاغل خانگی', desc: 'تقدیرنامه رسمی از وزارت تعاون، کار و رفاه اجتماعی' }
+    ],
+    courses: [
+      {
+        title: 'آموزش حرفه‌ای بافت تابلوفرش و قالی‌بافی سنتی و کامپیوتری',
+        hours: '۷۰ ساعت کارگاهی عملی',
+        campus: 'شعب ۱ و ۲ ماهریار',
+        fee: '۳,۲۰۰,۰۰۰ تومان',
+        installment: 'امکان پرداخت اقساطی + تامین دار و ابزار',
+        link: 'course-single.html'
+      }
+    ],
+    schedule: [
+      { day: 'یکشنبه و سه‌شنبه', hours: '۱۰:۰۰ الی ۱۳:۰۰', location: 'شعبه ۱: مرتضوی (کارگاه هنر)', type: 'چله‌کشی و بافت تابلوفرش' },
+      { day: 'چهارشنبه‌ها', hours: '۱۰:۰۰ الی ۱۳:۰۰', location: 'شعبه ۲: اسکندری (کارگاه صنایع دستی)', type: 'گلیم‌بافی و رفوگری' }
+    ]
+  },
+  salehi: {
+    id: 'salehi',
+    name: 'دکتر زهره صالحی',
+    title: 'مدرس ارشد دپارتمان خدمات آموزشی و پداگوژی عمومی (کارت مربیگری)',
+    academic: 'دکتری علوم تربیتی و مدیریت آموزشی',
+    license: 'کد مربیگری رسمی فنی‌حرفه‌ای: ۹۵/۳۳/۴۱۷۷',
+    image: 'assets/img/instructors/salehi.jpg',
+    dept: 'خدمات آموزشی و پداگوژی',
+    deptKey: 'pedagogy',
+    phone: '09030411617',
+    phoneDisplay: '۰۹۰۳۰۴۱۱۶۱۷ (دفتر آموزشگاه)',
+    expYears: '۱۶+ سال',
+    students: '۹۵۰+ مربی',
+    satisfaction: '۴.۹۶',
+    passingRate: '۹۹.۵٪',
+    bio: [
+      'دکتر زهره صالحی از اساتید برجسته علوم تربیتی، مدرس دوره‌های ارتقای صلاحیت حرفه‌ای مربیان سازمان فنی و حرفه‌ای و متخصص طراحی سیستم‌های آموزشی هستند. ایشان دوره پداگوژی عمومی را جهت دریافت کارت مربیگری رسمی و مجوز تاسیس آموزشگاه تدریس می‌نمایند.'
+    ],
+    education: [
+      { year: '۱۳۹۵', title: 'دکتری علوم تربیتی - برنامه‌ریزی درسی و آموزشی', desc: 'دانشگاه علامه طباطبائی' },
+      { year: '۱۳۹۰', title: 'کارشناسی ارشد مدیریت آموزشی', desc: 'دانشگاه تهران' }
+    ],
+    certs: [
+      { title: 'کارت مربیگری رسمی خدمات آموزشی از سازمان فنی و حرفه‌ای', desc: 'مدرس رسمی دوره‌های پداگوژی و فنون تدریس' },
+      { title: 'عضو انجمن مطالعات برنامه درسی ایران', desc: 'مؤلف مقالات پژوهشی بین‌المللی در حوزه یادگیری تجربی' }
+    ],
+    courses: [
+      {
+        title: 'پداگوژی عمومی (روش‌ها و فنون نوین تدریس فنی و حرفه‌ای)',
+        hours: '۶۰ ساعت استاندارد مربیگری',
+        campus: 'شعبه ۲ اسکندری + آنلاین کشوری',
+        fee: '۳,۸۰۰,۰۰۰ تومان',
+        installment: 'پرداخت در ۲ قسط',
+        link: 'course-single.html'
+      }
+    ],
+    schedule: [
+      { day: 'پنج‌شنبه‌ها', hours: '۰۹:۰۰ الی ۱۶:۰۰', location: 'شعبه ۲: اسکندری و آنلاین', type: 'دوره فشرده پداگوژی ویژه شاغلین و مربیان' }
+    ]
+  }
+};
+
+function initInstructorSingleProfile() {
+  const profileContainer = document.querySelector('.instructor-single-layout');
+  if (!profileContainer) return;
+
+  // 1. Tab switching
+  const tabs = document.querySelectorAll('.instructor-tab-link');
+  const panes = document.querySelectorAll('.instructor-tab-pane');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.getAttribute('data-tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      panes.forEach(p => p.classList.remove('active'));
+
+      tab.classList.add('active');
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) targetPane.classList.add('active');
+    });
+  });
+
+  // 2. Check URL Parameter ?id=...
+  const urlParams = new URLSearchParams(window.location.search);
+  const instructorId = urlParams.get('id');
+
+  if (instructorId && INSTRUCTORS_DATA[instructorId]) {
+    const data = INSTRUCTORS_DATA[instructorId];
+    renderInstructorData(data);
+  }
+
+  // 3. Handle Sidebar Consultation Form Submission
+  const sidebarForm = document.getElementById('instructorSidebarForm');
+  if (sidebarForm) {
+    sidebarForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const phoneInput = sidebarForm.querySelector('input[type="tel"]');
+      const nameInput = sidebarForm.querySelector('input[name="fullname"]');
+
+      if (!phoneInput || !phoneInput.value.trim()) {
+        if (typeof Swal !== 'undefined') {
+          Swal.fire({
+            icon: 'warning',
+            title: 'شماره تماس الزامی است',
+            text: 'لطفاً شماره تلفن همراه خود را وارد فرمایید.',
+            confirmButtonText: 'تایید',
+            confirmButtonColor: '#554596'
+          });
+        } else {
+          alert('لطفاً شماره تماس را وارد نمایید.');
+        }
+        return;
+      }
+
+      const userName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : 'کارآموز گرامی';
+
+      if (typeof Swal !== 'undefined') {
+        Swal.fire({
+          icon: 'success',
+          title: 'درخواست مشاوره ثبت شد!',
+          text: `با تشکر از شما ${userName} عزیز! درخواست مشاوره تخصصی شما ثبت گردید و کارشناس دپارتمان به زودی با شما تماس خواهد گرفت.`,
+          confirmButtonText: 'سپاس',
+          confirmButtonColor: '#554596'
+        });
+      }
+
+      if (typeof Toastify !== 'undefined') {
+        Toastify({
+          text: `درخواست مشاوره برای ${userName} ثبت گردید`,
+          duration: 4000,
+          gravity: 'top',
+          position: 'left',
+          style: {
+            background: 'linear-gradient(135deg, #10b981, #059669)',
+            borderRadius: '12px',
+            fontFamily: 'IRANSansX'
+          }
+        }).showToast();
+      }
+
+      sidebarForm.reset();
+    });
+  }
+}
+
+function renderInstructorData(data) {
+  // Update document title & SEO
+  document.title = `${data.name} | رزومه، مدارک رسمی و دوره‌های مربیگری در آموزشگاه ماهریار`;
+
+  // Update Breadcrumb
+  const breadcrumbCurrent = document.getElementById('instBreadcrumbCurrent');
+  if (breadcrumbCurrent) breadcrumbCurrent.textContent = data.name;
+
+  // Header Details
+  const nameEl = document.getElementById('instHeaderName');
+  if (nameEl) nameEl.textContent = data.name;
+
+  const headlineEl = document.getElementById('instHeaderHeadline');
+  if (headlineEl) headlineEl.textContent = data.title;
+
+  const avatarEl = document.getElementById('instHeaderAvatar');
+  if (avatarEl) {
+    avatarEl.src = data.image;
+    avatarEl.alt = data.name;
+  }
+
+  const deptBadge = document.getElementById('instHeaderDeptBadge');
+  if (deptBadge) deptBadge.textContent = data.dept;
+
+  const licenseEl = document.getElementById('instHeaderLicense');
+  if (licenseEl) licenseEl.textContent = data.license;
+
+  // KPIs
+  const expVal = document.getElementById('instKpiExp');
+  if (expVal) expVal.textContent = data.expYears;
+
+  const stuVal = document.getElementById('instKpiStudents');
+  if (stuVal) stuVal.textContent = data.students;
+
+  const satVal = document.getElementById('instKpiSatisfaction');
+  if (satVal) satVal.textContent = `${data.satisfaction} / ۵`;
+
+  const passVal = document.getElementById('instKpiPassing');
+  if (passVal) passVal.textContent = data.passingRate;
+
+  // Bio Paragraphs
+  const bioContainer = document.getElementById('instBioContainer');
+  if (bioContainer && data.bio) {
+    bioContainer.innerHTML = data.bio.map(p => `<p>${p}</p>`).join('');
+  }
+
+  // Education Timeline
+  const eduContainer = document.getElementById('instEduContainer');
+  if (eduContainer && data.education) {
+    eduContainer.innerHTML = data.education.map(item => `
+      <div class="timeline-item">
+        <div class="timeline-year">${item.year}</div>
+        <h4 class="timeline-title">${item.title}</h4>
+        <p class="timeline-desc">${item.desc}</p>
+      </div>
+    `).join('');
+  }
+
+  // Certifications
+  const certContainer = document.getElementById('instCertContainer');
+  if (certContainer && data.certs) {
+    certContainer.innerHTML = data.certs.map(cert => `
+      <div class="cert-card-item">
+        <div class="cert-icon"><i class="fa-solid fa-award"></i></div>
+        <div class="cert-info">
+          <h5>${cert.title}</h5>
+          <p>${cert.desc}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Courses List
+  const coursesContainer = document.getElementById('instCoursesContainer');
+  if (coursesContainer && data.courses) {
+    coursesContainer.innerHTML = data.courses.map(c => `
+      <div class="inst-course-card">
+        <div class="inst-course-meta">
+          <h4 class="inst-course-title">${c.title}</h4>
+          <div class="inst-course-details-row">
+            <span><i class="fa-solid fa-clock"></i> ${c.hours}</span>
+            <span><i class="fa-solid fa-location-dot"></i> ${c.campus}</span>
+            <span class="badge badge-success"><i class="fa-solid fa-check"></i> ${c.installment}</span>
+          </div>
+        </div>
+        <div class="inst-course-price-wrap">
+          <span class="inst-course-fee">${c.fee}</span>
+          <a href="${c.link}" class="btn btn-primary btn-sm">مشاهده سرفصل‌ها و ثبت‌نام</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Schedule Table
+  const scheduleContainer = document.getElementById('instScheduleTbody');
+  if (scheduleContainer && data.schedule) {
+    scheduleContainer.innerHTML = data.schedule.map(s => `
+      <tr>
+        <td><strong>${s.day}</strong></td>
+        <td>${s.hours}</td>
+        <td>${s.location}</td>
+        <td><span class="badge badge-primary">${s.type}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  // Sidebar prefilled instructor name
+  const hiddenInstInput = document.getElementById('sidebarInstructorNameInput');
+  if (hiddenInstInput) hiddenInstInput.value = data.name;
+
+  const sidebarPhoneLink = document.getElementById('instSidebarPhoneLink');
+  if (sidebarPhoneLink) {
+    sidebarPhoneLink.href = `tel:${data.phone}`;
+    sidebarPhoneLink.innerHTML = `<i class="fa-solid fa-phone"></i> <span>${data.phoneDisplay}</span>`;
+  }
+}
+
 
 
 

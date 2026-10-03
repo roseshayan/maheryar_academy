@@ -1,0 +1,50 @@
+{
+  "name": "آموزشگاه فنی و حرفه‌ای ماهریار",
+  "short_name": "ماهریار",
+  "description": "آموزشگاه فنی و حرفه‌ای آزاد ماهریار تهران - دوره‌های مهارتی بازار کار با مدرک بین‌المللی فنی و حرفه‌ای",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#faf9fc",
+  "theme_color": "#554596",
+  "dir": "rtl",
+  "lang": "fa-IR",
+  "icons": [
+    {
+      "src": "assets/img/Logo-Icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/img/Maher Yar (3).png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "دوره‌های آموزشی",
+      "short_name": "دوره‌ها",
+      "description": "مشاهده لیست کامل دوره‌ها و رشته‌های مهارتی",
+      "url": "./index.html#courses",
+      "icons": [{ "src": "assets/img/Logo-Icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "مشاوره رایگان",
+      "short_name": "مشاوره",
+      "description": "درخواست مشاوره رایگان با کارشناسان آموزشگاه",
+      "url": "./index.html#consultation",
+      "icons": [{ "src": "assets/img/Logo-Icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "شعب و لوکیشن",
+      "short_name": "شعب",
+      "description": "آدرس و مسیریابی شعب مرتضوی و اسکندری در نشان",
+      "url": "./index.html#branches",
+      "icons": [{ "src": "assets/img/Logo-Icon.svg", "sizes": "any" }]
+    }
+  ]
+}

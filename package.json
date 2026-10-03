@@ -1,0 +1,32 @@
+{
+  "name": "maheryar",
+  "version": "1.0.0",
+  "description": "وب‌سایت آموزشگاه فنی و حرفه‌ای آزاد ماهریار (Maheryar Academy)",
+  "main": "index.html",
+  "scripts": {
+    "postinstall": "node scripts/copy-vendor.js",
+    "build": "node scripts/copy-vendor.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roseshayan/maheryar_academy.git"
+  },
+  "keywords": [
+    "maheryar",
+    "آموزشگاه",
+    "فنی و حرفه ای",
+    "برنامه نویسی",
+    "طراحی",
+    "icdl"
+  ],
+  "author": "Maheryar Academy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roseshayan/maheryar_academy/issues"
+  },
+  "homepage": "https://github.com/roseshayan/maheryar_academy#readme",
+  "dependencies": {
+    "lucide": "^1.16.0",
+    "swiper": "^12.1.2"
+  }
+}

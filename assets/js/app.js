@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initInstructorsCatalog();
   initInstructorSingleProfile();
   initConsultationModal();
+  initGalleryLightbox();
+  initContactPage();
+  initBlogFeatures();
   initPwaSupport();
 });
 
@@ -1392,6 +1395,122 @@ function renderInstructorData(data) {
     sidebarPhoneLink.innerHTML = `<i class="fa-solid fa-phone"></i> <span>${data.phoneDisplay}</span>`;
   }
 }
+
+/**
+ * Gallery Lightbox Preview (about.html)
+ */
+function initGalleryLightbox() {
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  if (!galleryItems.length) return;
+
+  galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const imgSrc = item.getAttribute('data-img');
+      const title = item.getAttribute('data-title');
+      if (typeof Swal !== 'undefined' && imgSrc) {
+        Swal.fire({
+          title: title || 'کارگاه‌های آموزشگاه ماهریار',
+          imageUrl: imgSrc,
+          imageAlt: title || 'کارگاه آموزشی',
+          showCloseButton: true,
+          showConfirmButton: false,
+          background: '#fff',
+          customClass: {
+            popup: 'swal2-gallery-popup'
+          }
+        });
+      }
+    });
+  });
+}
+
+/**
+ * Contact Page Form Submission (contact.html)
+ */
+function initContactPage() {
+  const contactForm = document.getElementById('mainContactForm');
+  if (!contactForm) return;
+
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nameInput = document.getElementById('contactFullName');
+    const phoneInput = document.getElementById('contactPhoneNumber');
+    
+    const userName = nameInput ? nameInput.value.trim() : 'کاربر';
+    const userPhone = phoneInput ? phoneInput.value.trim() : '';
+
+    if (typeof Swal !== 'undefined') {
+      Swal.fire({
+        icon: 'success',
+        title: 'پیام شما با موفقیت ثبت شد!',
+        text: `با تشکر از شما ${userName} گرامی. پیام شما در سامانه دبیرخانه آموزشگاه ماهریار ثبت گردید و کارشناسان ما به زودی با شماره ${userPhone} تماس خواهند گرفت.`,
+        confirmButtonText: 'متشکرم',
+        confirmButtonColor: '#554596'
+      });
+    }
+
+    if (typeof Toastify !== 'undefined') {
+      Toastify({
+        text: `پیام ${userName} با موفقیت ارسال شد`,
+        duration: 4000,
+        gravity: 'top',
+        position: 'left',
+        style: {
+          background: 'linear-gradient(135deg, #10b981, #059669)',
+          borderRadius: '12px',
+          fontFamily: 'IRANSansX'
+        }
+      }).showToast();
+    }
+
+    contactForm.reset();
+  });
+}
+
+/**
+ * Blog Sharing & Copy Link (blog-single.html)
+ */
+function initBlogFeatures() {
+  const copyBtn = document.getElementById('btnCopyArticleLink');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        if (typeof Toastify !== 'undefined') {
+          Toastify({
+            text: 'لینک این راهنما در حافظه کپی شد',
+            duration: 3000,
+            gravity: 'top',
+            position: 'left',
+            style: {
+              background: 'linear-gradient(135deg, #554596, #a56baa)',
+              borderRadius: '12px',
+              fontFamily: 'IRANSansX'
+            }
+          }).showToast();
+        } else if (typeof Swal !== 'undefined') {
+          Swal.fire({
+            icon: 'info',
+            title: 'لینک کپی شد',
+            text: 'لینک مقاله در حافظه موقت سیستم شما ذخیره گردید.',
+            timer: 2000,
+            showConfirmButton: false
+          });
+        }
+      }).catch(() => {
+        if (typeof Toastify !== 'undefined') {
+          Toastify({
+            text: 'خطا در کپی لینک',
+            duration: 3000,
+            gravity: 'top',
+            position: 'left',
+            style: { background: '#ef4444' }
+          }).showToast();
+        }
+      });
+    });
+  }
+}
+
 
 
 

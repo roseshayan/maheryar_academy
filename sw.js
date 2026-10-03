@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maheryar-cache-v3';
+const CACHE_NAME = 'maheryar-cache-v4';
 const PRECACHE_ASSETS = [
   './',
   './index.html',
@@ -6,6 +6,10 @@ const PRECACHE_ASSETS = [
   './course-single.html',
   './instructors.html',
   './instructor-single.html',
+  './about.html',
+  './contact.html',
+  './blog.html',
+  './blog-single.html',
   './manifest.json',
   './assets/css/fontiran.css',
   './assets/css/style.css',
@@ -32,7 +36,13 @@ const PRECACHE_ASSETS = [
   './assets/img/instructors/rezvani.jpg',
   './assets/img/instructors/moradi.jpg',
   './assets/img/instructors/rezazadeh.jpg',
-  './assets/img/instructors/salehi.jpg'
+  './assets/img/instructors/salehi.jpg',
+  './assets/img/workshops/pc-lab.jpg',
+  './assets/img/workshops/fashion-lab.jpg',
+  './assets/img/workshops/reception.jpg',
+  './assets/img/workshops/carpet-lab.jpg',
+  './assets/img/blog/isco-certificate-guide.jpg',
+  './assets/img/blog/python-ai-career.jpg'
 ];
 
 self.addEventListener('install', (event) => {

@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCourseFiltering();
   initHeroFinder();
   initFaqAccordion();
+  initCurriculumAccordion();
+  initCourseTabs();
   initConsultationModal();
   initPwaSupport();
 });
@@ -331,3 +333,72 @@ function initPwaSupport() {
     });
   }
 }
+
+/**
+ * Curriculum / Syllabus Accordion on Course Single Page
+ */
+function initCurriculumAccordion() {
+  const modules = document.querySelectorAll('.curriculum-module');
+  if (!modules.length) return;
+
+  modules.forEach((mod, idx) => {
+    const header = mod.querySelector('.module-header');
+    const body = mod.querySelector('.module-body');
+    const icon = mod.querySelector('.module-meta i');
+
+    if (!header || !body) return;
+
+    // Open first module by default, collapse others
+    if (idx !== 0) {
+      body.style.display = 'none';
+    } else {
+      if (icon) icon.style.transform = 'rotate(180deg)';
+    }
+
+    header.addEventListener('click', () => {
+      const isHidden = body.style.display === 'none';
+      if (isHidden) {
+        body.style.display = 'block';
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      } else {
+        body.style.display = 'none';
+        if (icon) icon.style.transform = 'rotate(0deg)';
+      }
+    });
+  });
+}
+
+/**
+ * Course Details Navigation Tabs Active State & Smooth Scroll
+ */
+function initCourseTabs() {
+  const tabs = document.querySelectorAll('.course-nav-tab');
+  if (!tabs.length) return;
+
+  const sections = Array.from(tabs)
+    .map((tab) => {
+      const targetId = tab.getAttribute('href');
+      if (targetId && targetId.startsWith('#')) {
+        return document.querySelector(targetId);
+      }
+      return null;
+    })
+    .filter(Boolean);
+
+  const handleScroll = () => {
+    const scrollPos = window.scrollY + 120;
+    sections.forEach((sec, idx) => {
+      if (sec) {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          tabs.forEach((t) => t.classList.remove('active'));
+          if (tabs[idx]) tabs[idx].classList.add('active');
+        }
+      }
+    });
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+}
+
